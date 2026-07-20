@@ -6,10 +6,11 @@ import {
 describe('normalizeUrl', () => {
   it('strips utm/tracking params and hash, lowercases host', () => {
     expect(normalizeUrl('https://Example.com/a/?utm_source=x&id=5#frag'))
-      .toBe('https://example.com/a/?id=5');
+      .toBe('https://example.com/a?id=5');
   });
   it('removes trailing slash except root', () => {
     expect(normalizeUrl('https://example.com/a/')).toBe('https://example.com/a');
+    expect(normalizeUrl('https://example.com/')).toBe('https://example.com/');
   });
   it('returns input on invalid url', () => {
     expect(normalizeUrl('not a url')).toBe('not a url');

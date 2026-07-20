@@ -11,9 +11,10 @@ export function normalizeUrl(raw: string): string {
     for (const [k, v] of u.searchParams) if (!TRACKING.test(k)) keep.append(k, v);
     u.search = keep.toString();
     u.hostname = u.hostname.toLowerCase();
-    let s = u.toString();
-    if (s.endsWith('/') && u.pathname !== '/') s = s.slice(0, -1);
-    return s;
+    if (u.pathname !== '/' && u.pathname.endsWith('/')) {
+      u.pathname = u.pathname.slice(0, -1);
+    }
+    return u.toString();
   } catch {
     return raw.trim();
   }

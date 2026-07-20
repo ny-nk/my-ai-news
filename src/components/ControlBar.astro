@@ -1,0 +1,22 @@
+---
+interface Props { categories: readonly string[] }
+const { categories } = Astro.props;
+---
+<div class="controls">
+  <div class="chips-row">
+    {categories.map((c) => (
+      <label class="cat-chip"><input type="checkbox" class="cat-chip-input" value={c} />{c}</label>
+    ))}
+  </div>
+  <select id="lang" aria-label="言語">
+    <option value="all">言語: すべて</option>
+    <option value="ja">日本語</option>
+    <option value="en">英語</option>
+  </select>
+  <select id="sort" aria-label="並び替え">
+    <option value="affinity">好み順</option>
+    <option value="recent">新着順</option>
+  </select>
+  <input id="search" type="search" placeholder="キーワード検索" aria-label="検索" />
+  <button id="reset" type="button">学習をリセット</button>
+</div>

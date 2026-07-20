@@ -1,0 +1,45 @@
+---
+import '../styles/global.css';
+import NewsCard from '../components/NewsCard.astro';
+import ControlBar from '../components/ControlBar.astro';
+import { CATEGORIES } from '../../config/taxonomy';
+import type { NewsItem } from '../lib/types';
+import newsData from '../data/news.json';
+
+const items = (newsData as NewsItem[])
+  .slice()
+  .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+const lastUpdated = items[0]?.publishedAt ? new Date(items[0].publishedAt).toLocaleString('ja-JP') : '—';
+---
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My AI News</title>
+    <meta name="description" content="生成AI＋IT一般ニュースを好みに合わせて読むリーダー" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <h1>My AI News</h1>
+        <p class="sub">
+          生成AI＋IT一般の最新ニュース ・ {items.length}件 ・ 最終更新 {lastUpdated}<br />
+          好みの学習はこの端末内（localStorage）だけで完結し、外部に送信されません。
+        </p>
+      </header>
+
+      <ControlBar categories={CATEGORIES} />
+
+      <ul class="feed" id="feed">
+        {items.map((item) => <li><NewsCard item={item} /></li>)}
+      </ul>
+      <p id="empty" hidden>該当する記事がありません。</p>
+    </div>
+
+    <script>
+      import { initEnhance } from '../lib/enhance';
+      initEnhance();
+    </script>
+  </body>
+</html>

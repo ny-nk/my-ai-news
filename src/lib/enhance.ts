@@ -56,18 +56,21 @@ export function initEnhance(): void {
 
   const render = (): void => {
     const shown = cards.filter(visible);
-    shown.sort((a, b) =>
-      state.sort === 'recent'
-        ? new Date(b.item.publishedAt).getTime() - new Date(a.item.publishedAt).getTime()
-        : computeScore(b.item, prefs, SCORING, now) - computeScore(a.item, prefs, SCORING, now),
-    );
+    const scored = shown.map((c) => ({
+      c,
+      key:
+        state.sort === 'recent'
+          ? new Date(c.item.publishedAt).getTime()
+          : computeScore(c.item, prefs, SCORING, now),
+    }));
+    scored.sort((a, b) => b.key - a.key);
     for (const c of cards) c.unit.hidden = true;
-    for (const c of shown) {
+    for (const { c } of scored) {
       c.unit.hidden = false;
       feed.appendChild(c.unit);
     }
     const empty = document.getElementById('empty');
-    if (empty) empty.hidden = shown.length !== 0;
+    if (empty) empty.hidden = scored.length !== 0;
   };
 
   // 記事内アクション（イベント委譲）

@@ -25,4 +25,13 @@ describe('classify', () => {
     const r = classify(item('Weekly digest', 'covers CHATGPT and gpt-5'));
     expect(r.categories).toContain('LLM・チャットAI');
   });
+  it('does not false-match short ASCII patterns inside larger words', () => {
+    const r = classify(item('The therapist gave average advice on newspaper storage'));
+    expect(r.categories).toEqual(['IT一般']); // no api/rag/paper false hits
+    expect(r.tags).toEqual([]);
+  });
+  it('still matches ASCII patterns as whole words', () => {
+    const r = classify(item('New API released for the agent'));
+    expect(r.categories).toContain('プロダクト・ツール');
+  });
 });

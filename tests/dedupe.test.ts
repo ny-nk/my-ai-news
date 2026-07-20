@@ -45,4 +45,10 @@ describe('trim', () => {
   it('drops items with empty publishedAt', () => {
     expect(trim([n('x', 'No date', '')], NOW, 14, 300)).toHaveLength(0);
   });
+  it('drops future-dated items beyond the skew window', () => {
+    const future = n('fut', 'Future', new Date(NOW + 2 * DAY).toISOString());
+    const ok = n('ok', 'Now', new Date(NOW - 1 * DAY).toISOString());
+    const out = trim([future, ok], NOW, 14, 300);
+    expect(out.map((i) => i.id)).toEqual(['ok']);
+  });
 });

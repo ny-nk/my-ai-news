@@ -17,11 +17,12 @@ export function dedupe(items: NewsItem[]): NewsItem[] {
 
 export function trim(items: NewsItem[], now: number, days = 14, max = 300): NewsItem[] {
   const cutoff = now - days * 86400000;
+  const SKEW = 6 * 3600000; // tolerate up to 6h of clock skew
   return items
     .filter((it) => {
       if (!it.publishedAt) return false;
       const ts = new Date(it.publishedAt).getTime();
-      return !Number.isNaN(ts) && ts >= cutoff;
+      return !Number.isNaN(ts) && ts >= cutoff && ts <= now + SKEW;
     })
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
     .slice(0, max);

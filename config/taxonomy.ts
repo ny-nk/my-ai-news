@@ -8,9 +8,13 @@ export const CATEGORIES = [
   'ビジネス・投資・規制',
   'OSS・モデル公開',
   'IT一般',
+  'Claude Codeプラグイン',
 ] as const;
 
 export const DEFAULT_CATEGORY = 'IT一般';
+
+/** プラグイン常設カード用の固定カテゴリ（分類器を通さず付与） */
+export const PLUGIN_CATEGORY = 'Claude Codeプラグイン';
 
 /** キーワード→カテゴリ/タグ。実装後もここを育てる。 */
 export const RULES: Rule[] = [

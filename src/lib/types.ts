@@ -21,6 +21,8 @@ export interface NewsItem {
   categories: string[];
   tags: string[];
   lang: Lang;
+  /** 常設カード（プラグイン等）: トリム除外・日付非表示・言語フィルタ免除 */
+  pinned?: boolean;
 }
 
 export interface Source {

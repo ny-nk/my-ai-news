@@ -2,7 +2,7 @@
 import type { NewsItem } from '../lib/types';
 interface Props { item: NewsItem }
 const { item } = Astro.props;
-const date = item.publishedAt ? new Date(item.publishedAt).toLocaleDateString('ja-JP') : '';
+const date = !item.pinned && item.publishedAt ? new Date(item.publishedAt).toLocaleDateString('ja-JP') : '';
 ---
 <article
   class="news-card"
@@ -12,6 +12,7 @@ const date = item.publishedAt ? new Date(item.publishedAt).toLocaleDateString('j
   data-source={item.source}
   data-lang={item.lang}
   data-published={item.publishedAt}
+  data-pinned={item.pinned ? 'true' : undefined}
 >
   <a class="title" href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a>
   <div class="meta">

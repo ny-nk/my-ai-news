@@ -1,14 +1,17 @@
 import { describe, it, expect } from 'vitest';
-import { CATEGORIES, DEFAULT_CATEGORY, RULES } from '../config/taxonomy';
+import { CATEGORIES, DEFAULT_CATEGORY, RULES, PLUGIN_CATEGORY } from '../config/taxonomy';
 import { SOURCES } from '../config/sources';
 import { SCORING } from '../config/scoring';
 
 describe('config', () => {
-  it('has exactly 7 categories', () => {
-    expect(CATEGORIES).toHaveLength(7);
+  it('has exactly 8 categories', () => {
+    expect(CATEGORIES).toHaveLength(8);
   });
   it('default category is one of CATEGORIES', () => {
     expect(CATEGORIES).toContain(DEFAULT_CATEGORY);
+  });
+  it('PLUGIN_CATEGORY is one of CATEGORIES', () => {
+    expect(CATEGORIES).toContain(PLUGIN_CATEGORY);
   });
   it('every rule targets a known category', () => {
     for (const r of RULES) expect(CATEGORIES).toContain(r.category);

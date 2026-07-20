@@ -21,6 +21,7 @@ function parseCard(el: HTMLElement): NewsItem {
     categories: split(el.dataset.categories),
     tags: split(el.dataset.tags),
     lang: (el.dataset.lang as Lang) ?? 'en',
+    pinned: el.dataset.pinned === 'true',
   };
 }
 
@@ -45,7 +46,7 @@ export function initEnhance(): void {
   const visible = (c: CardRef): boolean => {
     if (prefs.hidden.includes(c.item.id)) return false;
     if (state.cats.size && !c.item.categories.some((x) => state.cats.has(x))) return false;
-    if (state.lang !== 'all' && c.item.lang !== state.lang) return false;
+    if (!c.item.pinned && state.lang !== 'all' && c.item.lang !== state.lang) return false;
     if (state.query) {
       const q = state.query.toLowerCase();
       const hay = `${c.item.title} ${c.item.summary} ${c.item.tags.join(' ')}`.toLowerCase();

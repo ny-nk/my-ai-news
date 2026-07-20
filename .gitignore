@@ -15,3 +15,6 @@ Thumbs.db
 # logs
 *.log
 npm-debug.log*
+
+# subagent-driven-development scratch (progress ledger, briefs, diffs)
+.superpowers/

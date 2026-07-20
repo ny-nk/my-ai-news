@@ -30,9 +30,17 @@ describe('trim', () => {
     const out = trim(items, NOW, 14, 300);
     expect(out.map((i) => i.id)).toEqual(['new', 'mid']);
   });
-  it('caps at max', () => {
+  it('caps at max, keeping the newest', () => {
     const items = Array.from({ length: 5 }, (_, i) => n('i' + i, 't' + i, new Date(NOW - i * 1000).toISOString()));
-    expect(trim(items, NOW, 14, 3)).toHaveLength(3);
+    const out = trim(items, NOW, 14, 3);
+    expect(out).toHaveLength(3);
+    expect(out.map((i) => i.id)).toEqual(['i0', 'i1', 'i2']);
+  });
+  it('keeps an item exactly `days` old and drops one just past it', () => {
+    const atBoundary = trim([n('edge', 'Edge', new Date(NOW - 14 * DAY).toISOString())], NOW, 14, 300);
+    expect(atBoundary.map((i) => i.id)).toEqual(['edge']);
+    const justOver = trim([n('over', 'Over', new Date(NOW - 14 * DAY - 1000).toISOString())], NOW, 14, 300);
+    expect(justOver).toHaveLength(0);
   });
   it('drops items with empty publishedAt', () => {
     expect(trim([n('x', 'No date', '')], NOW, 14, 300)).toHaveLength(0);

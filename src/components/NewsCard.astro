@@ -1,0 +1,30 @@
+---
+import type { NewsItem } from '../lib/types';
+interface Props { item: NewsItem }
+const { item } = Astro.props;
+const date = item.publishedAt ? new Date(item.publishedAt).toLocaleDateString('ja-JP') : '';
+---
+<article
+  class="news-card"
+  data-id={item.id}
+  data-categories={item.categories.join('|')}
+  data-tags={item.tags.join('|')}
+  data-source={item.source}
+  data-lang={item.lang}
+  data-published={item.publishedAt}
+>
+  <a class="title" href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a>
+  <div class="meta">
+    <span class="source">{item.source}</span>
+    {date && <time datetime={item.publishedAt}>{date}</time>}
+  </div>
+  {item.summary && <p class="summary">{item.summary}</p>}
+  <div class="taglist">
+    {item.categories.map((c) => <span class="chip">{c}</span>)}
+    {item.tags.map((t) => <span class="tag">#{t}</span>)}
+  </div>
+  <div class="actions">
+    <button class="like" type="button" aria-label="興味あり">👍</button>
+    <button class="hide" type="button" aria-label="非表示にする">🙅</button>
+  </div>
+</article>

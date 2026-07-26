@@ -34,6 +34,9 @@ jobs:
 
       - run: npm ci
 
+      - name: Typecheck
+        run: npm run typecheck
+
       - name: Fetch news
         run: npm run fetch
 

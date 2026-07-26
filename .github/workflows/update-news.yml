@@ -1,16 +1,21 @@
-name: Update news
+name: Update news and deploy
 
-# 毎日ニュースを取得して news.json を更新（コミット）する。
-# Pages デプロイは含まない（private リポジトリのため）。
-# 公開したくなったら upload-pages-artifact + deploy-pages のジョブを足す。
+# 毎日ニュースを取得して news.json を更新（コミット）し、GitHub Pages へ公開する。
 
 on:
   schedule:
     - cron: '0 22 * * *' # 毎日 22:00 UTC ≒ 翌 07:00 JST
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths-ignore: # ドキュメントだけの変更では動かさない
+      - '**.md'
+      - 'docs/**'
 
 permissions:
   contents: write # news.json のコミット用
+  pages: write
+  id-token: write
 
 concurrency:
   group: update-news
@@ -32,9 +37,6 @@ jobs:
       - name: Fetch news
         run: npm run fetch
 
-      - name: Verify build still succeeds
-        run: npm run build
-
       - name: Commit updated news.json
         run: |
           if ! git diff --quiet -- src/data/news.json; then
@@ -46,3 +48,24 @@ jobs:
           else
             echo "news.json unchanged"
           fi
+
+      - name: Build
+        run: npm run build
+        env:
+          # github.repository は全トリガーで確実に入る（event ペイロード依存を避ける）
+          BASE_PATH: /${{ github.event.repository.name || 'my-ai-news' }}/
+          SITE_URL: https://${{ github.repository_owner }}.github.io
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: update
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

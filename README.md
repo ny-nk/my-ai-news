@@ -16,31 +16,17 @@ npm test          # 単体テスト
 npm run update    # fetch + build（ワンショット更新）
 ```
 
-## 自動更新（GitHub Actions）
+## 自動更新と公開（GitHub Actions → GitHub Pages）
 
-`.github/workflows/update-news.yml` が毎日 22:00 UTC（≒翌 07:00 JST）と手動実行（Actions → Run workflow）で
-ニュースを取得し、変更があれば `src/data/news.json` をコミットする。閲覧はローカルで `npm run dev`。
+`.github/workflows/update-news.yml` が毎日 22:00 UTC（≒翌 07:00 JST）・手動実行（Actions → Run workflow）・
+`main` への push（ドキュメントのみの変更は除く）で動き、ニュース取得 → `news.json` 更新のコミット →
+ビルド → Pages へデプロイまで行う。
 
-## 公開したくなったら（GitHub Pages）
+- 公開URL: <https://ny-nk.github.io/my-ai-news/>
+- 初回のみ Settings → Pages → Build and deployment → Source = **GitHub Actions** を設定する。
 
-Pages はパブリックリポジトリ（または GitHub Pro 以上のプライベート）で使える。有効化する手順:
-
-1. Settings → Pages → Build and deployment → Source = **GitHub Actions**。
-2. `update-news.yml` のビルドステップに環境変数を追加する。
-
-   ```yaml
-   - name: Build
-     run: npm run build
-     env:
-       BASE_PATH: /${{ github.event.repository.name }}/
-       SITE_URL: https://${{ github.repository_owner }}.github.io
-   ```
-
-3. 同ワークフローに Pages 用の権限（`pages: write`、`id-token: write`）と、
-   `actions/upload-pages-artifact@v3`（`path: dist`）→ `actions/deploy-pages@v4` のジョブを追加する。
-4. 公開URL: `https://<user>.github.io/<repo>/`
-
-公開しても外部に出るのは公開ニュースへのリンクとコードのみで、各利用者の好みデータはブラウザ内に留まる。
+公開されるのは公開ニュースへのリンクとコードだけで、各利用者の好みデータはブラウザ内（localStorage）に留まる。
+スマートフォンからは公開URLをそのまま開けばよい。
 
 ## 好みの調整
 

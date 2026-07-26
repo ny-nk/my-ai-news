@@ -37,10 +37,14 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
+      # push 時はコードのデプロイだけ行い、ニュース更新は cron / 手動に任せる
+      # （push のたびに news.json コミットが増えて開発ブランチと競合するのを防ぐ）
       - name: Fetch news
+        if: github.event_name != 'push'
         run: npm run fetch
 
       - name: Commit updated news.json
+        if: github.event_name != 'push'
         run: |
           if git diff --quiet -- src/data/news.json; then
             echo "news.json unchanged"

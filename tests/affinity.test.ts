@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { emptyPrefs, computeScore, updatePrefs } from '../src/lib/affinity';
+import { emptyPrefs, computeScore, updatePrefs, unhideItem } from '../src/lib/affinity';
 import { SCORING } from '../config/scoring';
 import type { NewsItem } from '../src/lib/types';
 
@@ -56,5 +56,24 @@ describe('updatePrefs', () => {
     const p = updatePrefs(emptyPrefs(), item(), 'click', SCORING);
     expect(p.tags['LLM']).toBe(SCORING.wClick);
     expect(p.seen).toContain('a');
+  });
+});
+
+describe('unhideItem', () => {
+  it('undoes a down signal: unhides and restores weights', () => {
+    const start = emptyPrefs();
+    const hidden = updatePrefs(start, item(), 'down', SCORING);
+    const undone = unhideItem(hidden, item(), SCORING);
+    expect(undone.hidden).not.toContain('a');
+    expect(undone.tags['LLM']).toBe(0);
+    expect(undone.categories['LLM・チャットAI']).toBe(0);
+    expect(undone.sources['Src']).toBe(0);
+  });
+  it('is non-mutating and leaves other hidden ids alone', () => {
+    const p0 = updatePrefs(emptyPrefs(), item({ id: 'keep' }), 'down', SCORING);
+    const p1 = updatePrefs(p0, item(), 'down', SCORING);
+    const p2 = unhideItem(p1, item(), SCORING);
+    expect(p2.hidden).toEqual(['keep']);
+    expect(p1.hidden).toEqual(['keep', 'a']); // input untouched
   });
 });

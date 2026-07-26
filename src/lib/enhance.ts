@@ -1,5 +1,5 @@
 import { loadPrefs, savePrefs, resetPrefs, serializePrefs, parsePrefsBackup } from './storage';
-import { computeScore, updatePrefs, emptyPrefs } from './affinity';
+import { computeScore, updatePrefs, emptyPrefs, unhideItem } from './affinity';
 import { SCORING } from '../../config/scoring';
 import type { NewsItem, Prefs, Lang } from './types';
 
@@ -43,6 +43,14 @@ export function initEnhance(): void {
   };
   const now = Date.now();
 
+  // ステータス通知と 🙅 の取り消し用（クリックハンドラより前に用意する）
+  const status = document.getElementById('backup-status');
+  const say = (msg: string): void => {
+    if (status) status.textContent = msg;
+  };
+  const undoBtn = document.getElementById('undo') as HTMLButtonElement | null;
+  let lastHidden: NewsItem | null = null;
+
   const visible = (c: CardRef): boolean => {
     if (prefs.hidden.includes(c.item.id)) return false;
     if (state.cats.size && !c.item.categories.some((x) => state.cats.has(x))) return false;
@@ -72,6 +80,8 @@ export function initEnhance(): void {
     }
     const empty = document.getElementById('empty');
     if (empty) empty.hidden = scored.length !== 0;
+    const count = document.getElementById('result-count');
+    if (count) count.textContent = `${scored.length}件表示中（全${cards.length}件）`;
   };
 
   // 記事内アクション（イベント委譲）
@@ -81,13 +91,19 @@ export function initEnhance(): void {
     if (!cardEl) return;
     const ref = cards.find((c) => c.unit.contains(cardEl));
     if (!ref) return;
-    if (target.closest('.like')) {
+    const likeBtn = target.closest<HTMLButtonElement>('.like');
+    if (likeBtn) {
       prefs = updatePrefs(prefs, ref.item, 'up', SCORING);
       savePrefs(prefs);
+      likeBtn.setAttribute('aria-pressed', 'true'); // 押した実感（新着順でも見える）
+      say(`「${ref.item.title.slice(0, 24)}」に興味ありを記録しました。`);
       render();
     } else if (target.closest('.hide')) {
       prefs = updatePrefs(prefs, ref.item, 'down', SCORING);
       savePrefs(prefs);
+      lastHidden = ref.item;
+      if (undoBtn) undoBtn.hidden = false;
+      say('非表示にしました。');
       render();
     } else if (target.closest('.title')) {
       prefs = updatePrefs(prefs, ref.item, 'click', SCORING);
@@ -119,17 +135,30 @@ export function initEnhance(): void {
     render();
   });
   document.getElementById('reset')?.addEventListener('click', () => {
+    if (!confirm('学習した好み・非表示設定をすべて削除します。よろしいですか？')) return;
     resetPrefs();
     prefs = emptyPrefs();
+    lastHidden = null;
+    if (undoBtn) undoBtn.hidden = true;
+    for (const el of document.querySelectorAll('.like[aria-pressed="true"]')) {
+      el.setAttribute('aria-pressed', 'false');
+    }
+    say('学習データをリセットしました。');
+    render();
+  });
+
+  // 🙅 の取り消し（直前の1件）
+  undoBtn?.addEventListener('click', () => {
+    if (!lastHidden) return;
+    prefs = unhideItem(prefs, lastHidden, SCORING);
+    savePrefs(prefs);
+    say(`「${lastHidden.title.slice(0, 24)}」を再表示しました。`);
+    lastHidden = null;
+    undoBtn.hidden = true;
     render();
   });
 
   // 好みデータのバックアップ / 復元（localStorage は消え得るため）
-  const status = document.getElementById('backup-status');
-  const say = (msg: string): void => {
-    if (status) status.textContent = msg;
-  };
-
   document.getElementById('export')?.addEventListener('click', () => {
     const blob = new Blob([serializePrefs(prefs)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -154,6 +183,8 @@ export function initEnhance(): void {
       } else {
         prefs = restored;
         savePrefs(prefs);
+        lastHidden = null;
+        if (undoBtn) undoBtn.hidden = true;
         render();
         say('好みデータを復元しました。');
       }

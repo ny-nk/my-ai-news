@@ -25,6 +25,16 @@ export function computeScore(
   return cfg.wRecency * recency + cfg.wAffinity * aff + explore;
 }
 
+/** 🙅 の取り消し: hidden から外し、down で引いた重みを戻す（非破壊）。 */
+export function unhideItem(prefs: Prefs, item: NewsItem, cfg: ScoringConfig): Prefs {
+  const p: Prefs = structuredClone(prefs);
+  p.hidden = p.hidden.filter((id) => id !== item.id);
+  for (const t of item.tags) p.tags[t] = (p.tags[t] ?? 0) + cfg.wDown;
+  for (const c of item.categories) p.categories[c] = (p.categories[c] ?? 0) + cfg.wDown;
+  p.sources[item.source] = (p.sources[item.source] ?? 0) + cfg.wDown;
+  return p;
+}
+
 export function updatePrefs(
   prefs: Prefs,
   item: NewsItem,

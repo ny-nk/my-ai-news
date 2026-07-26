@@ -3,11 +3,15 @@ interface Props { categories: readonly string[] }
 const { categories } = Astro.props;
 ---
 <div class="controls">
-  <div class="chips-row">
-    {categories.map((c) => (
-      <label class="cat-chip"><input type="checkbox" class="cat-chip-input" value={c} />{c}</label>
-    ))}
-  </div>
+  <fieldset>
+    <legend>カテゴリで絞り込み（複数選択可）</legend>
+    <div class="chips-row">
+      {categories.map((c) => (
+        <label class="cat-chip"><input type="checkbox" class="cat-chip-input" value={c} />{c}</label>
+      ))}
+    </div>
+  </fieldset>
+  <span class="spacer"></span>
   <select id="lang" aria-label="言語">
     <option value="all">言語: すべて</option>
     <option value="ja">日本語</option>
@@ -18,9 +22,11 @@ const { categories } = Astro.props;
     <option value="recent">新着順</option>
   </select>
   <input id="search" type="search" placeholder="キーワード検索" aria-label="検索" />
-  <button id="reset" type="button">学習をリセット</button>
   <button id="export" type="button" title="好みデータをファイルに保存（ブラウザのデータが消えても復元できます）">好みを書き出す</button>
   <button id="import" type="button" title="書き出したファイルから好みデータを復元">好みを読み込む</button>
   <input id="import-file" type="file" accept="application/json,.json" hidden aria-hidden="true" tabindex="-1" />
+  <button id="reset" type="button" title="学習した好み・非表示設定をすべて削除">学習をリセット</button>
+  <p id="result-count" class="result-count" role="status" aria-live="polite"></p>
   <span id="backup-status" class="backup-status" role="status" aria-live="polite"></span>
+  <button id="undo" type="button" hidden>非表示を元に戻す</button>
 </div>

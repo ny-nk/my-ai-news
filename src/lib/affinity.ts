@@ -17,10 +17,13 @@ export function computeScore(
   rand: () => number = Math.random,
 ): number {
   const recency = item.publishedAt ? Math.pow(0.5, ageDays(item.publishedAt, now) / cfg.halfLifeDays) : 0;
-  let aff = 0;
-  for (const t of item.tags) aff += prefs.tags[t] ?? 0;
-  for (const c of item.categories) aff += cfg.alphaCategory * (prefs.categories[c] ?? 0);
-  aff += cfg.betaSource * (prefs.sources[item.source] ?? 0);
+  let raw = 0;
+  for (const t of item.tags) raw += prefs.tags[t] ?? 0;
+  for (const c of item.categories) raw += cfg.alphaCategory * (prefs.categories[c] ?? 0);
+  raw += cfg.betaSource * (prefs.sources[item.source] ?? 0);
+  // (-1,1) に飽和させる（spec §7.2 の「正規化して合算」）。
+  // 重みが育っても recency と explore の影響力が残り、フィードが硬直しない。
+  const aff = raw / (1 + Math.abs(raw));
   const explore = rand() * cfg.explore;
   return cfg.wRecency * recency + cfg.wAffinity * aff + explore;
 }

@@ -36,6 +36,24 @@ describe('computeScore', () => {
     const s = computeScore(item({ publishedAt: '' }), emptyPrefs(), noExplore, NOW, zeroRand);
     expect(s).toBe(0);
   });
+  it('affinity saturates: a heavy profile cannot bury fresh items forever', () => {
+    // 30日分の学習相当の重み（正規化がないと recency が無力化する）
+    const p = emptyPrefs();
+    p.tags['LLM'] = 80;
+    const oldOnProfile = computeScore(
+      item({ publishedAt: new Date(NOW - 6 * DAY).toISOString() }), p, noExplore, NOW, zeroRand);
+    const freshOffProfile = computeScore(
+      item({ tags: [], categories: [], source: 'Other', publishedAt: new Date(NOW).toISOString() }),
+      p, noExplore, NOW, zeroRand);
+    expect(freshOffProfile).toBeGreaterThan(oldOnProfile);
+  });
+  it('affinity contribution is bounded to ±wAffinity', () => {
+    const p = emptyPrefs();
+    p.tags['LLM'] = 1000;
+    const s = computeScore(item({ publishedAt: '' }), p, noExplore, NOW, zeroRand);
+    expect(s).toBeLessThanOrEqual(noExplore.wAffinity);
+    expect(s).toBeGreaterThan(0);
+  });
 });
 
 describe('updatePrefs', () => {

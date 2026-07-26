@@ -3,7 +3,7 @@ import {
   loadPrefs, savePrefs, resetPrefs, serializePrefs, parsePrefsBackup, type StorageLike,
 } from '../src/lib/storage';
 import { emptyPrefs } from '../src/lib/affinity';
-import { STORAGE_KEY, PREFS_VERSION } from '../config/scoring';
+import { STORAGE_KEY, LEGACY_STORAGE_KEY, PREFS_VERSION } from '../config/scoring';
 
 function fakeStore(): StorageLike {
   const m = new Map<string, string>();
@@ -48,6 +48,23 @@ describe('storage', () => {
       removeItem: () => {},
     };
     expect(() => savePrefs(emptyPrefs(), throwing)).not.toThrow();
+  });
+  it('migrates prefs from the legacy (my-ai-news) key once', () => {
+    const store = fakeStore();
+    const p = emptyPrefs(); p.tags['LLM'] = 4;
+    store.setItem(LEGACY_STORAGE_KEY, JSON.stringify(p));
+    const loaded = loadPrefs(store);
+    expect(loaded.tags['LLM']).toBe(4);
+    expect(store.getItem(STORAGE_KEY)).not.toBeNull(); // 新キーへ保存済み
+    expect(store.getItem(LEGACY_STORAGE_KEY)).toBeNull(); // 旧キーは掃除
+  });
+  it('prefers the new key when both exist', () => {
+    const store = fakeStore();
+    const oldP = emptyPrefs(); oldP.tags['OLD'] = 1;
+    const newP = emptyPrefs(); newP.tags['NEW'] = 2;
+    store.setItem(LEGACY_STORAGE_KEY, JSON.stringify(oldP));
+    store.setItem(STORAGE_KEY, JSON.stringify(newP));
+    expect(loadPrefs(store).tags['NEW']).toBe(2);
   });
   it('reset clears prefs', () => {
     const store = fakeStore();

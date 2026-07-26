@@ -69,7 +69,7 @@ jobs:
         run: npm run build
         env:
           # github.repository は全トリガーで確実に入る（event ペイロード依存を避ける）
-          BASE_PATH: /${{ github.event.repository.name || 'my-ai-news' }}/
+          BASE_PATH: /${{ github.event.repository.name || 'my-tech-news' }}/
           SITE_URL: https://${{ github.repository_owner }}.github.io
 
       - uses: actions/upload-pages-artifact@v3

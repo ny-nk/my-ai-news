@@ -1,4 +1,4 @@
-# My AI News
+# My Tech News
 
 日英の生成AI＋IT一般ニュースを集約し、訪問者ごとにブラウザ内で好みを学習して並び替える公開静的サイト。
 
@@ -22,7 +22,7 @@ npm run update    # fetch + build（ワンショット更新）
 `main` への push（ドキュメントのみの変更は除く）で動き、ニュース取得 → `news.json` 更新のコミット →
 ビルド → Pages へデプロイまで行う。
 
-- 公開URL: <https://ny-nk.github.io/my-ai-news/>
+- 公開URL: <https://ny-nk.github.io/my-tech-news/>
 - 初回のみ Settings → Pages → Build and deployment → Source = **GitHub Actions** を設定する。
 
 公開されるのは公開ニュースへのリンクとコードだけで、各利用者の好みデータはブラウザ内（localStorage）に留まる。

@@ -22,7 +22,7 @@ const sourcesNote = meta.sourcesFailed.length > 0 ? ` ⚠ 取得失敗 ${meta.so
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>My AI News</title>
+    <title>My Tech News</title>
     <meta name="description" content="生成AI＋IT一般ニュースを好みに合わせて読むリーダー" />
     <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
     <link rel="apple-touch-icon" href={`${import.meta.env.BASE_URL}apple-touch-icon.png`} />
@@ -32,7 +32,7 @@ const sourcesNote = meta.sourcesFailed.length > 0 ? ` ⚠ 取得失敗 ${meta.so
   <body>
     <div class="wrap">
       <header>
-        <h1>My AI News</h1>
+        <h1>My Tech News</h1>
         <p class="sub">
           ニュース {news.length}件 ＋ プラグイン {plugins.length}件 ・ 更新 {builtAt}（JST） ・ ソース {sourcesOk}/{meta.sourcesTotal}{sourcesNote}<br />
           好みの学習はこの端末内（localStorage）だけで完結し、外部に送信されません。

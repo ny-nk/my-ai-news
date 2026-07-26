@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { buildSyncUrl, readSyncedPrefs, syncablePrefs, SYNC_PARAM } from '../src/lib/sync';
 import { emptyPrefs } from '../src/lib/affinity';
 
-const BASE = 'https://example.com/my-ai-news/';
+const BASE = 'https://example.com/my-tech-news/';
 
 function samplePrefs() {
   const p = emptyPrefs();

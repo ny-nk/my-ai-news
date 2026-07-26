@@ -208,7 +208,7 @@ export function initEnhance(): void {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'my-ai-news-prefs.json';
+    a.download = 'my-tech-news-prefs.json';
     a.click();
     URL.revokeObjectURL(url);
     say('好みデータを書き出しました。');

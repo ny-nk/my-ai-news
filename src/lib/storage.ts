@@ -1,6 +1,6 @@
 import type { Prefs } from './types';
 import { emptyPrefs } from './affinity';
-import { STORAGE_KEY, PREFS_VERSION } from '../../config/scoring';
+import { STORAGE_KEY, LEGACY_STORAGE_KEY, PREFS_VERSION } from '../../config/scoring';
 
 export interface StorageLike {
   getItem(key: string): string | null;
@@ -11,10 +11,20 @@ export interface StorageLike {
 export function loadPrefs(store: StorageLike = globalThis.localStorage): Prefs {
   try {
     const raw = store.getItem(STORAGE_KEY);
-    if (!raw) return emptyPrefs();
     // バックアップと同じ検証を通す（version だけでなく各フィールドの型も見る）。
     // 壊れたデータを素通しすると affinity 側で実行時クラッシュするため。
-    return parsePrefsBackup(raw) ?? emptyPrefs();
+    if (raw) return parsePrefsBackup(raw) ?? emptyPrefs();
+    // 旧アプリ名（my-ai-news）時代のキーから一度だけ移行する
+    const legacy = store.getItem(LEGACY_STORAGE_KEY);
+    if (legacy) {
+      const migrated = parsePrefsBackup(legacy);
+      if (migrated) {
+        store.setItem(STORAGE_KEY, JSON.stringify(migrated));
+        store.removeItem(LEGACY_STORAGE_KEY);
+        return migrated;
+      }
+    }
+    return emptyPrefs();
   } catch {
     return emptyPrefs();
   }

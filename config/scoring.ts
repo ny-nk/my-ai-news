@@ -1,7 +1,9 @@
 import type { ScoringConfig } from '../src/lib/types';
 
 export const PREFS_VERSION = 1;
-export const STORAGE_KEY = 'my-ai-news:prefs:v1';
+export const STORAGE_KEY = 'my-tech-news:prefs:v1';
+/** 旧名時代のキー。初回読み込みで新キーへ移行する。 */
+export const LEGACY_STORAGE_KEY = 'my-ai-news:prefs:v1';
 
 export const SCORING: ScoringConfig = {
   wRecency: 1,

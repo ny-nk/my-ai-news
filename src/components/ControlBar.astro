@@ -19,4 +19,8 @@ const { categories } = Astro.props;
   </select>
   <input id="search" type="search" placeholder="キーワード検索" aria-label="検索" />
   <button id="reset" type="button">学習をリセット</button>
+  <button id="export" type="button" title="好みデータをファイルに保存（ブラウザのデータが消えても復元できます）">好みを書き出す</button>
+  <button id="import" type="button" title="書き出したファイルから好みデータを復元">好みを読み込む</button>
+  <input id="import-file" type="file" accept="application/json,.json" hidden aria-hidden="true" tabindex="-1" />
+  <span id="backup-status" class="backup-status" role="status" aria-live="polite"></span>
 </div>

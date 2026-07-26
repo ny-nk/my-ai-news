@@ -1,4 +1,4 @@
-import { loadPrefs, savePrefs, resetPrefs } from './storage';
+import { loadPrefs, savePrefs, resetPrefs, serializePrefs, parsePrefsBackup } from './storage';
 import { computeScore, updatePrefs, emptyPrefs } from './affinity';
 import { SCORING } from '../../config/scoring';
 import type { NewsItem, Prefs, Lang } from './types';
@@ -122,6 +122,45 @@ export function initEnhance(): void {
     resetPrefs();
     prefs = emptyPrefs();
     render();
+  });
+
+  // 好みデータのバックアップ / 復元（localStorage は消え得るため）
+  const status = document.getElementById('backup-status');
+  const say = (msg: string): void => {
+    if (status) status.textContent = msg;
+  };
+
+  document.getElementById('export')?.addEventListener('click', () => {
+    const blob = new Blob([serializePrefs(prefs)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'my-ai-news-prefs.json';
+    a.click();
+    URL.revokeObjectURL(url);
+    say('好みデータを書き出しました。');
+  });
+
+  const fileInput = document.getElementById('import-file') as HTMLInputElement | null;
+  document.getElementById('import')?.addEventListener('click', () => fileInput?.click());
+  fileInput?.addEventListener('change', () => {
+    const file = fileInput.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const restored = parsePrefsBackup(String(reader.result ?? ''));
+      if (!restored) {
+        say('読み込めませんでした（形式かバージョンが不正です）。');
+      } else {
+        prefs = restored;
+        savePrefs(prefs);
+        render();
+        say('好みデータを復元しました。');
+      }
+      fileInput.value = ''; // 同じファイルを再選択できるように
+    };
+    reader.onerror = () => say('ファイルの読み取りに失敗しました。');
+    reader.readAsText(file);
   });
 
   render();

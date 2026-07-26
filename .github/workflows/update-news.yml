@@ -39,15 +39,24 @@ jobs:
 
       - name: Commit updated news.json
         run: |
-          if ! git diff --quiet -- src/data/news.json; then
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add src/data/news.json
-            git commit -m "chore: update news.json"
-            git push
-          else
+          if git diff --quiet -- src/data/news.json; then
             echo "news.json unchanged"
+            exit 0
           fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/data/news.json
+          git commit -m "chore: update news.json"
+          # 人の push と競合したら rebase して数回リトライする
+          for i in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+            echo "push rejected (attempt $i) — rebasing onto origin/main"
+            git pull --rebase --autostash origin main || exit 1
+          done
+          echo "could not push news.json after 3 attempts" >&2
+          exit 1
 
       - name: Build
         run: npm run build

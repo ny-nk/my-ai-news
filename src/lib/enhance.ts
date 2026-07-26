@@ -37,7 +37,7 @@ export function initEnhance(): void {
   let prefs: Prefs = loadPrefs();
   const state = {
     cats: new Set<string>(),
-    lang: 'all' as 'all' | Lang,
+    lang: 'ja' as 'all' | Lang, // 既定は日本語（ControlBar の selected と一致させる）
     query: '',
     sort: 'affinity' as 'affinity' | 'recent',
   };

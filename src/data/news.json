@@ -1,5 +1,18 @@
 [
   {
+    "id": "d08e99e838b14fcc",
+    "title": "「コナン君が頭にちらつく」『VIVANT』対話型の生成AI新キャスト「ハヤト」の声に注目集まる「高山みなみだよね？」「いや田中真弓さんだよ」（中日スポーツ） - Yahoo!ニュース",
+    "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE13RTUxalhlNDVuY2t2ZGtFa0VhU0lwU0FELWVmUHFsel9YTEtLV0FNVmREUmdfaFh3MTJ5cVFsWWY1TWE4QlMwcFhVZS1ncFg5Q1BVbk5YN253YW9QZndVTjRvblJNOVFlNW5yTjk5cDNLZE5McGJRNEdMOEZLdFE?oc=5",
+    "source": "Google News (生成AI)",
+    "publishedAt": "2026-07-26T12:54:42.000Z",
+    "summary": "「コナン君が頭にちらつく」『VIVANT』対話型の生成AI新キャスト「ハヤト」の声に注目集まる「高山みなみだよね？」「いや田中真弓さんだよ」（中日スポーツ） Yahoo!ニュース",
+    "categories": [
+      "IT一般"
+    ],
+    "tags": [],
+    "lang": "ja"
+  },
+  {
     "id": "9f87c7b7a306b3b9",
     "title": "人型抱き枕とはひと味違う「骨格入り抱き枕」は心音も聞こえてぐっすり快眠できそう",
     "url": "https://gigazine.net/news/20260726-bone-supported-body-pillow-wf2026s",
@@ -39,121 +52,12 @@
     "lang": "ja"
   },
   {
-    "id": "9fe2468bc0d3a267",
-    "title": "web search を渡しても gpt-5-mini は検索しなかった",
-    "url": "https://zenn.dev/dev_ctun/articles/web-search-tool-not-used",
-    "source": "Zenn (LLM)",
-    "publishedAt": "2026-07-26T11:06:59.000Z",
-    "summary": "OpenAI Responses API の web_search を有効にしたまま競合調査をやらせたら、実在企業が 5 社出てきたのに出典が 1 つも付かなかった。ツールは最初から渡してある。モデルが使わなかっただけだ。 プロンプトに 3 行足したら、出てくる会社そのものが入れ替わった。モデルは gpt-5-mini。 出典ゼロで「それっぽい正解」が出てくる やらせたのは「規格外野菜の定期便を都…",
-    "categories": [
-      "LLM・チャットAI",
-      "プロダクト・ツール"
-    ],
-    "tags": [
-      "LLM",
-      "プロダクト"
-    ],
-    "lang": "ja"
-  },
-  {
     "id": "b9e12d22ce0aa9ef",
     "title": "学術論文の過半数に生成AIの影響か　トロント大が730万本を分析、AIの特徴的な言葉の使用頻度が1年で3倍以上に上昇 - ｄメニューニュース",
     "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOUDJxdVI4SGNxajdMdE5ESmc3aG5ONGtYaEt3TXNhVEl4SUNTMm9RekVlbk5sNDlUWnN1cXN6LUtzUlhvM2pqQkZ1ZVJjejk0ODhrSi13bHdRRHYyYURsb0xqWUlsUm82aldnSW5CajhjS3ZpUzg4SU9Na3hPMWRSZ1dqTXo3RDlkWnJEekpJa3FuQ2FKb3JmT2xpd0MtRlNwdzZxOEdoZzkyZ1lIZ3dRd2dGaUhfYlJpNnJjUGhId2JiS1oxWjJR0gF3QVVfeXFMTnFIZG9MWXVHczdMbVRRSUhsVHJEVmp4bmJ3cGFvUTV5NFpsaWY2ZDBVTWRVaG5MT05vYzlEaDRQdkxMaUZXZ2ZQOVMyYkdNWVBIWXc0aVpobjh2SWhWTGVWZm4yTEdLVW5yeUY0YzduQ3hYSEU2N1k?oc=5",
     "source": "Google News (生成AI)",
     "publishedAt": "2026-07-26T11:03:00.000Z",
     "summary": "学術論文の過半数に生成AIの影響か トロント大が730万本を分析、AIの特徴的な言葉の使用頻度が1年で3倍以上に上昇 ｄメニューニュース",
-    "categories": [
-      "研究・論文"
-    ],
-    "tags": [
-      "研究"
-    ],
-    "lang": "ja"
-  },
-  {
-    "id": "6020ef1e4d24c87c",
-    "title": "Agent Frameworkの「ハーネス」がexperimentalを卒業した、中身を読む",
-    "url": "https://zenn.dev/kazu_aiengineer/articles/agent-framework-harness-stable",
-    "source": "Zenn (LLM)",
-    "publishedAt": "2026-07-26T11:01:38.000Z",
-    "summary": "! 2026-07-26 時点の公式ドキュメントとGitHubリポジトリの実装に基づいています。パッケージのバージョン状態は流動的なので、導入判断時は文末の一次ソースを確認してください。 先に結論 Microsoft Agent Framework の「ハーネス」（Python: create_harness_agent / .NET: HarnessAgent）が experimental から…",
-    "categories": [
-      "LLM・チャットAI"
-    ],
-    "tags": [
-      "agent"
-    ],
-    "lang": "ja"
-  },
-  {
-    "id": "892871f3e8010ea0",
-    "title": "GGUF互換なのに llama.cpp と PPL が一致しなかった──Layer 0まで追って見えた「演算経路」の違い",
-    "url": "https://zenn.dev/sakamoro/articles/f966c34eaee6ee",
-    "source": "Zenn (LLM)",
-    "publishedAt": "2026-07-26T11:00:05.000Z",
-    "summary": "自作の Rust 製 LLM 推論エンジン (ALICE-LLM) で Qwen 3.5-4B の Perplexity を実測したら、同じ GGUF 重みを読ませたはずの llama.cpp と PPL が 2.68 倍 乖離していました GGUF 互換 = llama.cpp 互換ではなかった 8 個の仮説を順に潰し、Layer 0 の op-by-op ダンプまで潜って辿り着いた「現時点で最…",
-    "categories": [
-      "LLM・チャットAI",
-      "OSS・モデル公開"
-    ],
-    "tags": [
-      "LLM",
-      "OSS"
-    ],
-    "lang": "ja"
-  },
-  {
-    "id": "10985039f0127eb5",
-    "title": "LLMのプロンプトは何をしている？役割と作り方をやさしく解説",
-    "url": "https://zenn.dev/opus6/articles/795c426654c70a",
-    "source": "Zenn (LLM)",
-    "publishedAt": "2026-07-26T10:43:40.000Z",
-    "summary": "ChatGPTなどの生成AIを使っていて、「昨日はうまく答えてくれたのに、今日は話がかみ合わない」と感じたことはないでしょうか。 モデルが同じでも、入力する文章が変われば、返ってくる答えは大きく変わります。その差を生むのがプロンプトです。 ! プロンプトは、AIを動かす魔法の呪文ではありません。LLMに渡す「仕事の依頼書」です。 何をしてほしいのか、どんな情報を使うのか、どの形で答えるのか。これら…",
-    "categories": [
-      "LLM・チャットAI"
-    ],
-    "tags": [
-      "LLM"
-    ],
-    "lang": "ja"
-  },
-  {
-    "id": "89230a973ac05dc0",
-    "title": "OllamaではじめるローカルLLM入門(Python対応)",
-    "url": "https://zenn.dev/sdkfz181tiger/articles/bb22e00f405626",
-    "source": "Zenn (LLM)",
-    "publishedAt": "2026-07-26T10:32:20.000Z",
-    "summary": "01: Ollamaとは!? Ollamaは、ローカル環境で気軽にLLM(Large Language Model)を実行・管理するツールです。 お手持ちのコンピューター内だけで完結するので、トークン消費を気にせずLLMを使う事ができます。 更に、クラウドAPIへデータを送信せず、ローカル環境だけでLLMを実行できます。 他にも様々なモデルを自由に選択することも可能です。 (一度モデルをダウンロー…",
-    "categories": [
-      "LLM・チャットAI",
-      "プロダクト・ツール"
-    ],
-    "tags": [
-      "LLM",
-      "プロダクト"
-    ],
-    "lang": "ja"
-  },
-  {
-    "id": "44f8d864a4b19d45",
-    "title": "「自分には無理」と諦めていた分野に、AIで越境することについて",
-    "url": "https://zenn.dev/karamage/articles/e96433146a2e94",
-    "source": "Zenn (LLM)",
-    "publishedAt": "2026-07-26T10:29:24.000Z",
-    "summary": "はじめに この記事は、AIによって専門外のスキルを低コストで補えるようになり、「自分には無理」という諦めが「試してみよう」に変わったことについての自分の中の変化について書きました。 このことは自分だけでなく、例えば自分の周りでも、フロントエンジニアの人がバックエンドのコードを修正したり、PdMの方がバグをの原因を突き止めてコードを修正したり、といった 自分の専門外の分野にチャレンジしている姿を多く…",
-    "categories": [
-      "IT一般"
-    ],
-    "tags": [],
-    "lang": "ja"
-  },
-  {
-    "id": "78a72aec3b46e5c2",
-    "title": "Byte Levelのhybridモデル(MambaとTransformer)を学習してみる(H-Net)",
-    "url": "https://zenn.dev/if001/articles/a012d1e035a922",
-    "source": "Zenn (LLM)",
-    "publishedAt": "2026-07-26T10:12:23.000Z",
-    "summary": "ByteLevelのhybridモデル(Mamba+Transformer)としてH-Netが提案されています。 https://arxiv.org/abs/2507.07955 https://github.com/goombalab/hnet 論文では、英語や中国語での学習を行っているので日本語メインで学習を行ってみようと思います。 Byte Levelのモデルを試してみたかったのと、Mamb…",
     "categories": [
       "研究・論文"
     ],
@@ -174,36 +78,6 @@
     ],
     "tags": [],
     "lang": "en"
-  },
-  {
-    "id": "522274b2ce4b99e5",
-    "title": "AI事業者ガイドライン1.2版の「人間の判断の介在」を実装する。自律性4レベル・承認ゲート・監査ログの設計",
-    "url": "https://zenn.dev/tokimoa/articles/57ff0290b01439",
-    "source": "Zenn (LLM)",
-    "publishedAt": "2026-07-26T09:51:58.000Z",
-    "summary": "設計の要点 2026年3月31日公表の「AI事業者ガイドライン」第1.2版では、AIエージェント・フィジカルAIに関する事項が追記されました。自律動作のリスク、権限の最小化、人間の判断の介在、操作履歴等のログ管理が主なポイントです よく見かける「1.2版でHITL（Human-in-the-Loop）が法的に必須化された」という解説を裏付ける拘束的な規定は確認できません。ただし「出力によって重大な…",
-    "categories": [
-      "LLM・チャットAI"
-    ],
-    "tags": [
-      "agent"
-    ],
-    "lang": "ja"
-  },
-  {
-    "id": "f079f6ec2dff9d69",
-    "title": "AI推進法をe-Gov APIで全28条取得する。エンジニアがまず読む第7条・第13条・第16条",
-    "url": "https://zenn.dev/tokimoa/articles/fd5c8a0dd5e63f",
-    "source": "Zenn (LLM)",
-    "publishedAt": "2026-07-26T09:49:55.000Z",
-    "summary": "この記事で分かること AI推進法（令和7年法律第53号、2025年9月1日全面施行）の現行条文は、e-Gov法令検索のAPIで機械可読に取得できます 全28条のうち、エンジニア・情シスがまず読むべき3条は、第7条（業務利用する企業も「活用事業者」）、第13条（国が指針を整備する根拠）、第16条（権利侵害事案の分析と指導・助言等）です 法律、第13条に基づく適正性確保指針、AI事業者ガイドライン、自…",
-    "categories": [
-      "プロダクト・ツール"
-    ],
-    "tags": [
-      "プロダクト"
-    ],
-    "lang": "ja"
   },
   {
     "id": "c3ad5d8c4a71ac9d",
@@ -234,21 +108,6 @@
     "lang": "en"
   },
   {
-    "id": "456ffb7423588b64",
-    "title": "Sol／Terra／Lunaの比較からキャッシュ検証まで ― GPT-5.6 on Amazon Bedrock実践",
-    "url": "https://zenn.dev/kashiwabaray/articles/75b541fb607a85",
-    "source": "Zenn (LLM)",
-    "publishedAt": "2026-07-26T08:49:30.000Z",
-    "summary": "※本記事の内容は個人の見解であり、所属組織を代表するものではありません。 1. はじめに 2026年7月13日、OpenAIのGPT-5.6 Sol、Terra、LunaがAmazon Bedrockで一般提供されました。 さらに2026年7月24日には、AWSから次の内容を含む実践手順が公開されています。 https://aws.amazon.com/jp/blogs/machine-learn…",
-    "categories": [
-      "LLM・チャットAI"
-    ],
-    "tags": [
-      "LLM"
-    ],
-    "lang": "ja"
-  },
-  {
     "id": "3133c0316073e5cf",
     "title": "石川県内の中小企業4割以上が生成AIを活用 使用していない企業も3割以上が関心あり（テレビ金沢） - Yahoo!ニュース",
     "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1wdkJUX005QUIxOUpGNnlhaE96ZzljQkJmZFRHOWxUMnhDS1FkMnNRdHpwUE5vQXRZS0tPbXB1d1hIbUV5LXphQzh1WTlRZXc3N1JqTXpadnExM3kxT3JLbnlhWjFyT21yOUlKb2tVM0RZRlhXYXNqQXZNd3pCZUU?oc=5",
@@ -259,55 +118,6 @@
       "IT一般"
     ],
     "tags": [],
-    "lang": "ja"
-  },
-  {
-    "id": "344b544fa9897d49",
-    "title": "SKILL.mdは本当に効くのか。日本語業務スキルをローカルLLMで実測したら、効果と副作用が両方出た",
-    "url": "https://zenn.dev/tokimoa/articles/ac048d77f50029",
-    "source": "Zenn (LLM)",
-    "publishedAt": "2026-07-26T08:44:22.000Z",
-    "summary": "実測結果 Agent Skills形式（SKILL.md）の日本語業務スキルを6本作り、うち2本について「スキルを渡すと出力品質がどれだけ変わるか」をローカルLLM 2種×97問で実測しました。 スキル モデル 指標 素の依頼 ＋スキル 社内規程QA gemma-4-26b-a4b 引用F1 0.76 0.93 文書間矛盾の指摘（0-2） 0.17 1.00 llm-jp-3.1-13b 回答不能…",
-    "categories": [
-      "LLM・チャットAI",
-      "OSS・モデル公開"
-    ],
-    "tags": [
-      "LLM",
-      "agent",
-      "OSS"
-    ],
-    "lang": "ja"
-  },
-  {
-    "id": "14805b3aa96cf710",
-    "title": "日本語OCRモデルSarashina2.2-OCRをMLXへ移植する。モデルカードだけでは分からない実装を追った記録",
-    "url": "https://zenn.dev/tokimoa/articles/7493750c801369",
-    "source": "Zenn (LLM)",
-    "publishedAt": "2026-07-26T08:43:42.000Z",
-    "summary": "移植で分かったこと SB Intuitionsの日本語OCRモデル sbintuitions/sarashina2.2-ocr（3B・MIT）を、mlx-vlmに未収録のアーキテクチャだったため自前でモデルクラスを実装してMLX（Apple Silicon）へ移植しました。要点は3つです。 モデルカードは学習元を説明していますが、移植に必要な実行時構造までは分かりません。実装は Qwen2-VL系…",
-    "categories": [
-      "IT一般"
-    ],
-    "tags": [],
-    "lang": "ja"
-  },
-  {
-    "id": "b484b1bcc347e2ae",
-    "title": "ローカルLLMの長文処理4方式を実測したら、最大の敵は「1文字のJSON破損で全損」だった",
-    "url": "https://zenn.dev/tokimoa/articles/8db2cff715cf95",
-    "source": "Zenn (LLM)",
-    "publishedAt": "2026-07-26T08:42:58.000Z",
-    "summary": "実測結果 Anthropicが長期タスク向けに整理しているコンテキスト処理のパターン（compaction・structured note-taking・sub-agent）を、デスクトップ級ローカルLLMで同一条件比較しました。タスクは8会議・約1.6万トークンの文字起こしから全会議横断のTODO一覧を作る「TODO統合」、採点はゴールド照合による決定的評価です（gemma-4-26b-a4b…",
-    "categories": [
-      "LLM・チャットAI",
-      "OSS・モデル公開"
-    ],
-    "tags": [
-      "LLM",
-      "agent",
-      "OSS"
-    ],
     "lang": "ja"
   },
   {
@@ -322,23 +132,6 @@
     ],
     "tags": [],
     "lang": "en"
-  },
-  {
-    "id": "de6f9a4e9ed1fbf9",
-    "title": "LLMの監督モデルはどこまで小さくできるか。9B・35B・自己検査で実測したら三様の結果になった",
-    "url": "https://zenn.dev/tokimoa/articles/2f8a22ff2ee051",
-    "source": "Zenn (LLM)",
-    "publishedAt": "2026-07-26T08:41:53.000Z",
-    "summary": "実測結果 主モデルの出力を監督モデルが検査し、指摘があれば主モデルが再生成する二段構成を、日本語の議事録要約40問×監督3種で実測しました。効果は監督の選び方で正反対になります。 主モデル 監督 事実忠実度（0〜2） 期日誤り率 形式適合 検査速度 gemma-4-26b-a4b（強・基準1.83） Qwen3.5-9B 1.73（−0.10） 0.05 0.88 22秒/問 Qwen3.6-35…",
-    "categories": [
-      "LLM・チャットAI",
-      "OSS・モデル公開"
-    ],
-    "tags": [
-      "LLM",
-      "OSS"
-    ],
-    "lang": "ja"
   },
   {
     "id": "91d01f403985f130",
@@ -390,19 +183,6 @@
     "source": "GIGAZINE",
     "publishedAt": "2026-07-26T07:33:00.000Z",
     "summary": "ワンダーフェスティバル 2026[夏]ではアニメやマンガのキャラクターの姿をそのまま再現した作品だけでなく、原型師の独自の美的センスで造形した作品も数多く展示されています。『葬送のフリーレン』のフリーレンを美しく解釈した作品を見つけたので撮影してきました。 続きを読む...",
-    "categories": [
-      "IT一般"
-    ],
-    "tags": [],
-    "lang": "ja"
-  },
-  {
-    "id": "6766ad0208635fb3",
-    "title": "セキュリティは「完璧な防御」より「続く会話」 ―― AIと脆弱性を手当てし続ける安心感",
-    "url": "https://zenn.dev/daishiro/articles/ai-security-continuous-care",
-    "source": "Zenn (LLM)",
-    "publishedAt": "2026-07-26T07:18:05.000Z",
-    "summary": "はじめに こんにちは、daishir0です。 自分でサーバーやアプリをいくつも動かしていると、ずっと心の隅に引っかかっているものがあります。セキュリティです。 正直に言うと、怖いんですよね。使っているライブラリのどれかに、いつの間にか脆弱性が見つかっているかもしれない。でも、全部のパッケージを毎日手で追いかけるなんて、とても無理。かといって放っておくのも落ち着かない。この「気になるけど手が回らない…",
     "categories": [
       "IT一般"
     ],
@@ -676,12 +456,42 @@
     "lang": "ja"
   },
   {
+    "id": "c956272c3bdf78a1",
+    "title": "claude -pの--disallowedToolsでBashを丸ごと禁止したら、拒否ログに1件も残らなかった",
+    "url": "https://zenn.dev/numarn/articles/claude-disallowedtools-denial-log-handson",
+    "source": "Zenn (生成AI)",
+    "publishedAt": "2026-07-26T03:27:25.000Z",
+    "summary": "Claude Code の -p(対話画面を出さず1回指示を投げて結果だけ受け取るモード)には、使えるツールを絞り込むオプションが3種類あります。--tools(使えるツール自体を指定)、--allowedTools(許可パターンを追加)、--disallowedTools(禁止パターンを追加)です。今回はこの3つを、設定ファイル(.claude/settings.json)を一切使わず、CLIの…",
+    "categories": [
+      "LLM・チャットAI",
+      "プロダクト・ツール"
+    ],
+    "tags": [
+      "LLM",
+      "プロダクト"
+    ],
+    "lang": "ja"
+  },
+  {
     "id": "e6cdc9f947a67ee5",
     "title": "韓国で「民放のAI気象キャスター」画像が拡散…実際は別企業が制作した生成AI映像（KOREA WAVE） - Yahoo!ニュース",
     "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE45Q09iTHR4QU8wYnR3S0l6LUcyX3ViMGlTUHpEZmZ0Y2hpcnVITGV5b2g3OHFjbWswVEJ1Wlo2cElRZ19hS3dHR2RKTE9pV19JUVFreHlwQ05wamh6Zm94Y0EyRHBrZUFtZkxyNmRmRXNYTWFISTVLM3Y3LU5vdjQ?oc=5",
     "source": "Google News (生成AI)",
     "publishedAt": "2026-07-26T03:21:15.000Z",
     "summary": "韓国で「民放のAI気象キャスター」画像が拡散…実際は別企業が制作した生成AI映像（KOREA WAVE） Yahoo!ニュース",
+    "categories": [
+      "IT一般"
+    ],
+    "tags": [],
+    "lang": "ja"
+  },
+  {
+    "id": "637acf7b9d9f49a3",
+    "title": "freeeも弥生も使わず、生成AIだけで青色申告ソフトを2時間で作ってみた",
+    "url": "https://zenn.dev/ogiki/articles/8c7e158eb5df6e",
+    "source": "Zenn (生成AI)",
+    "publishedAt": "2026-07-26T03:20:10.000Z",
+    "summary": "はじめに 副業を始めてみると、思っていた以上に「税金」の存在を意識するようになりました。 私自身、昨年初めて副業で収入を得て確定申告を行いました。確定申告が終わって安心していたところ、翌年になって住民税の通知が届き、「こんなにかかるのか…」と驚いたことを今でも覚えています。 そこで今年は、以前から興味があった青色申告に挑戦することにしました。 青色申告にはさまざまなメリットがありますが、その中でも…",
     "categories": [
       "IT一般"
     ],
@@ -702,6 +512,23 @@
     "lang": "ja"
   },
   {
+    "id": "09743db2190f6780",
+    "title": "2026年8月に集中する Claude の移行期限まとめ — Workbench廃止・Opus 4.1リタイア",
+    "url": "https://zenn.dev/mdtechknowledge/articles/claude-august-2026-migration-deadlines",
+    "source": "Zenn (生成AI)",
+    "publishedAt": "2026-07-26T03:10:29.000Z",
+    "summary": "要点 2026年8月は Claude 関連の移行イベントが4件集中する。うち1件はデータ損失を伴う。 8月17日: レガシー Workbench 廃止。保存済みプロンプト・変数・evals は新 Workbench で非対応——エクスポートしないと失われる。同日に実験的プロンプトツールAPI 3本（generate_prompt / improve_prompt / templatize_prom…",
+    "categories": [
+      "LLM・チャットAI",
+      "プロダクト・ツール"
+    ],
+    "tags": [
+      "LLM",
+      "プロダクト"
+    ],
+    "lang": "ja"
+  },
+  {
     "id": "fa8d99fc8a763a98",
     "title": "Netflix、2026年に生成AIを約300作品で活用 「The American Experiment」のAI補助映像17分は2倍の速さ・半分のコストで制作 - Ledge.ai",
     "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5sMnJQcHJxV0NXcWl1cE1jN1hLbFlOeVlraUlxQVBVQjZQZWNjNlhnSTZRVWZOU2d5RlZVUkhEYVU3dm9pSlNBWVhaQmd1VVN4UUdDSUQtclM1R1hrMEtvRHhhQXR5c2twNVJKM1JlcFJBNTZheFlB?oc=5",
@@ -712,6 +539,21 @@
       "IT一般"
     ],
     "tags": [],
+    "lang": "ja"
+  },
+  {
+    "id": "3695d67ba29ada23",
+    "title": "Opus5が思考が浅いように感じる問題への対策",
+    "url": "https://zenn.dev/u1/articles/claude5-rules-collapse-and-fix",
+    "source": "Zenn (LLM)",
+    "publishedAt": "2026-07-26T03:01:36.000Z",
+    "summary": "Claude Code を Opus 5 に切り替えた直後から、応答の散文傾向が急に強まり、思考が浅くなる (構造化して考えられない) 変化が出ました。長年育ててきた rules (CLAUDE.md や常時ロードの指示ファイル群) は何も変えていないのに、です。調べていくと、モデルが悪いのでも rules が壊れたのでもなく、Claude 5 世代で Opus 5 に配られる本体 system…",
+    "categories": [
+      "LLM・チャットAI"
+    ],
+    "tags": [
+      "LLM"
+    ],
     "lang": "ja"
   },
   {
@@ -730,6 +572,19 @@
     "lang": "ja"
   },
   {
+    "id": "5b0e4400a56acfc9",
+    "title": "コンシューマー機2台のRPC、回線を3本張り替えて測り直した——帯域+55%でprefillは+5〜17%、decodeは帯域では決まらな",
+    "url": "https://zenn.dev/faliye/articles/2592357c20dbe1",
+    "source": "Zenn (LLM)",
+    "publishedAt": "2026-07-26T02:57:24.000Z",
+    "summary": "本稿は前回の検証記事の補足であり、5GbE・偽TB5・USB10GBps という3本の回線で6モデルを測定し、通信速度の違いが性能にどう効くかを比較したものです。 当初はTB5の検証だけを想定していました。線を買って、挿して、測って、終わり——数時間で片付くつもりでした。 ところがTB5はASMedia4242というチップの部分で、エンドツーエンドの導通に失敗しました。最初は納得がいきませんでした…",
+    "categories": [
+      "IT一般"
+    ],
+    "tags": [],
+    "lang": "ja"
+  },
+  {
     "id": "7bc20b6752f256b0",
     "title": "県内企業の3割以上が生成AIを業務で活用（2026年7月25日掲載）｜ABS NEWS NNN - 日テレNEWS NNN",
     "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNbExRd2xnc1UtWTBPcVpIa1Y0ek03YXNxTVNYb2IwdHFwbzBMeGRaWTFoQklHOTNQYU1tbThPRFZsM1phU1ZHbzF4SFdLN0g1OUtnMXRITHNxanBNbFE3dE43TzZDTHRfZXFtYnp0Y3NDUzBNUEtteGsxS19uOHhrcTU4V0RFeDQ?oc=5",
@@ -740,6 +595,23 @@
       "IT一般"
     ],
     "tags": [],
+    "lang": "ja"
+  },
+  {
+    "id": "8a0461d188e34480",
+    "title": "認知機能×実行トポロジー——AIエージェント設計パターンの二軸フレームワーク",
+    "url": "https://zenn.dev/hkame/articles/two-dimenstional-framework",
+    "source": "Zenn (LLM)",
+    "publishedAt": "2026-07-26T02:27:45.000Z",
+    "summary": "元論文: Jia Huang, Joey Tianyi Zhou (A*STAR), \"A Two-Dimensional Framework for AI Agent Design Patterns: Cognitive Function × Execution Topology\" (arXiv:2605.13850, 2026年3月) このブログを書こうと思ったきっかけは、以前書いた「Anth…",
+    "categories": [
+      "LLM・チャットAI",
+      "研究・論文"
+    ],
+    "tags": [
+      "agent",
+      "研究"
+    ],
     "lang": "ja"
   },
   {
@@ -808,6 +680,22 @@
     "lang": "en"
   },
   {
+    "id": "d805323c970aa315",
+    "title": "DGX Spark実践ガイド — 個人で買った128GBマシンで、ローカルLLMを回し尽くす",
+    "url": "https://zenn.dev/ojisan_ai_lab/books/dgx-spark-practical-guide",
+    "source": "Zenn (LLM)",
+    "publishedAt": "2026-07-26T01:41:03.000Z",
+    "summary": "NVIDIA DGX Sparkをおじさんが個人で買い、購入判断→セットアップ→大型モデル運用→サービス常駐→エージェント→実験→失敗まで、最初の2週間あまりで実際にやったことを全部書いた実録ガイドです。載っているコマンドはすべて実機検証済み、数字はすべて生ログ照合済み。5モデルの速度実測、約344GB分の回り道をした失敗事典、コマンド早見表、巻末にはOllamaコマンド＆Modelfileリファ…",
+    "categories": [
+      "LLM・チャットAI"
+    ],
+    "tags": [
+      "LLM",
+      "agent"
+    ],
+    "lang": "ja"
+  },
+  {
     "id": "e261dff9c625c99b",
     "title": "動いてしゃべる55cmドール「CutieroidDoll FAガール 轟雷」をワンフェス2026[夏]の会場で見てきました",
     "url": "https://gigazine.net/news/20260726-cutieroiddoll-gfagirl-gourai-wf2026s",
@@ -818,6 +706,24 @@
       "IT一般"
     ],
     "tags": [],
+    "lang": "ja"
+  },
+  {
+    "id": "25ff5a166fe1f4c5",
+    "title": "AIエージェントの出力が毎回8割で止まっていた。原因は渡していたspecのほうだった",
+    "url": "https://zenn.dev/mxhlix/articles/reference-driven-skill-architecture",
+    "source": "Zenn (LLM)",
+    "publishedAt": "2026-07-26T01:37:36.000Z",
+    "summary": "5言語で600本を超えるWebツールを、Claude Codeに作らせて運用しています。新規ツールを1本足すたびに、最初は抽象的な仕様書(spec)を渡していました。デザイン規約、コンポーネントのルール、禁止事項。エージェントはspecを読み、それらしいものを作り、8割の品質で止まります。残り2割を修正ラウンドで埋める。これを何十回も繰り返しました。 その「8割」は当時の体感であって、数字ではあり…",
+    "categories": [
+      "LLM・チャットAI",
+      "プロダクト・ツール"
+    ],
+    "tags": [
+      "LLM",
+      "agent",
+      "プロダクト"
+    ],
     "lang": "ja"
   },
   {
@@ -844,6 +750,21 @@
       "IT一般"
     ],
     "tags": [],
+    "lang": "ja"
+  },
+  {
+    "id": "bf2ab6d766682961",
+    "title": "さくらのAI Engineの無料枠でPodcast要約を置き換えようとしたけど、精度で見送った",
+    "url": "https://zenn.dev/yamadatt/articles/20260726-sakura-ai-engine-podcast-summary",
+    "source": "Zenn (LLM)",
+    "publishedAt": "2026-07-26T01:00:00.000Z",
+    "summary": "何をしようとしたか Podcastの文字起こしパイプラインを個人で運用しています。ざっくりこんな構成です。 Go + AWS SAM（Lambda / Step Functions / DynamoDB / S3）で組んでいて、要約部分はfal.ai経由でOpenRouterのgoogle/gemini-2.5-flashを叩いています。ここが毎回それなりに課金される。 そこで「さくらのAI En…",
+    "categories": [
+      "LLM・チャットAI"
+    ],
+    "tags": [
+      "LLM"
+    ],
     "lang": "ja"
   },
   {
@@ -884,6 +805,23 @@
     ],
     "tags": [
       "音声"
+    ],
+    "lang": "ja"
+  },
+  {
+    "id": "3175d6d669a96ebd",
+    "title": "CLIのRAGツールを、コアを分離してあったおかげでWebアプリまで広げられた話",
+    "url": "https://zenn.dev/nd3/articles/rag-cli-to-webapp",
+    "source": "Zenn (LLM)",
+    "publishedAt": "2026-07-26T00:30:01.000Z",
+    "summary": "この記事について 技術ドキュメント(PDF)に自然言語で質問できるRAGツールを個人開発しています。これまでの2本(RAGの精度評価で最初に見つかったのは、モデルの差ではなく「ものさし」のバグだった、RAGで最後に残った不正解1問を「解剖」したら、予定していた実験が丸ごと不要になった)では「精度をどう測って改善したか」を書いてきましたが、今回は毛色が違って、すでにあるCLIツールを、中身のロジック…",
+    "categories": [
+      "LLM・チャットAI",
+      "プロダクト・ツール"
+    ],
+    "tags": [
+      "RAG",
+      "プロダクト"
     ],
     "lang": "ja"
   },
@@ -968,6 +906,23 @@
     "lang": "en"
   },
   {
+    "id": "a40827b658520d96",
+    "title": "「AIで何でもできる」は、現代の「Excelで何でもできる」である",
+    "url": "https://zenn.dev/eggletric/articles/676b0a3c0c36ec",
+    "source": "Zenn (LLM)",
+    "publishedAt": "2026-07-25T22:29:08.000Z",
+    "summary": "! 筆者は DiffyPick という DB スキーマ差分ツールを作っています。この記事の終盤に自作ツールへの言及がありますが、主題はツールではなく、AI 時代のインターフェース論です。 AI に聞くと、面白いことが起きる この記事の主張を、先に AI に聞いてみたことがあります。Gemini、ChatGPT、Copilot、Claude。「客観的に評価してほしい」と頼んだ上で、自然言語での指示と…",
+    "categories": [
+      "LLM・チャットAI",
+      "プロダクト・ツール"
+    ],
+    "tags": [
+      "LLM",
+      "プロダクト"
+    ],
+    "lang": "ja"
+  },
+  {
     "id": "09b86492d811e439",
     "title": "海外の新作バカゲー「電車アタック」にマンガ家が感心した理由　ブッ飛んだ内容と完成度の高さ、そして“日本”",
     "url": "https://www.itmedia.co.jp/news/articles/2607/26/news010.html",
@@ -984,7 +939,7 @@
     "id": "dd6ad1e67f2f86d2",
     "title": "プロンプト設計の常識が変わった",
     "url": "https://zenn.dev/lingmu/articles/2026-07-26-claude-opus-5-context-engineering",
-    "source": "Zenn (生成AI)",
+    "source": "Zenn (LLM)",
     "publishedAt": "2026-07-25T22:05:31.000Z",
     "summary": "プロンプト設計の常識が変わった 2026-07-26 | 読了 4分 | #Claude #AI #ContextEngineering 「いいプロンプトを書けばいい」——その時代が終わりつつある。Claude Opus 5の登場で、AIとの対話を設計する考え方そのものが刷新された。今すぐ知らないと、既存のパイプラインが丸ごと時代遅れになるかもしれない。 Opus 5で何が変わったのか Anthr…",
     "categories": [
@@ -1054,6 +1009,36 @@
     "lang": "ja"
   },
   {
+    "id": "d7cb30ae63003000",
+    "title": "長野県の市町村マスタが87行あった——AIが本番DBに埋めた捏造データの話",
+    "url": "https://zenn.dev/arafifu_kikaiya/articles/a92397193160c9",
+    "source": "Zenn (LLM)",
+    "publishedAt": "2026-07-25T20:03:14.000Z",
+    "summary": "私は53歳の機械設計屋で、Webは素人だ。Claudeと二人三脚で長野県の移住物件検索アプリ（物件約1,700件）を作り、本番運用している。コードはほぼ全てAIが書いた。 これは、そのDBの中でAIが「それらしい市町村データ」を丸ごと作文していた事件の全記録だ。AIと何かを作っている人に、これほど実用的な怪談はないと思う。 発端は「何気ない抜き打ち」だった アプリは長野県の市町村ごとの人口や高齢化…",
+    "categories": [
+      "LLM・チャットAI"
+    ],
+    "tags": [
+      "LLM"
+    ],
+    "lang": "ja"
+  },
+  {
+    "id": "8e3e2fca75ce92e8",
+    "title": "Digging into Machine Learning",
+    "url": "https://zenn.dev/tosshi/books/digging-into-machine-learning",
+    "source": "Zenn (LLM)",
+    "publishedAt": "2026-07-25T19:54:07.000Z",
+    "summary": "機械学習の論文・実装・検証を自分で掘り下げ、整理していく本。個人用なので購入は推奨しません。",
+    "categories": [
+      "研究・論文"
+    ],
+    "tags": [
+      "研究"
+    ],
+    "lang": "ja"
+  },
+  {
     "id": "71a6545fd1704feb",
     "title": "SpaceX eyes tower catch for next Starship after auspicious end to 13th flight",
     "url": "https://arstechnica.com/space/2026/07/spacex-eyes-tower-catch-for-next-starship-after-auspicious-end-to-13th-flight",
@@ -1067,6 +1052,21 @@
       "プロダクト"
     ],
     "lang": "en"
+  },
+  {
+    "id": "6447ab7887627c2e",
+    "title": "Claude Certified Architect – Foundations(CCA-F/CCAR-F) の日本語演習50問[非公式]",
+    "url": "https://zenn.dev/ray_keymaso/books/passcraft-ccaf-practice",
+    "source": "Zenn (LLM)",
+    "publishedAt": "2026-07-25T16:40:21.000Z",
+    "summary": "Anthropic公式Exam Guideと公式ドキュメントのみを根拠に独自作成した、非公式の英日演習50問です。全5ドメイン各10問。日本語解説と一次情報リンク付き。実試験問題、受験者の記憶、公式サンプル問題の転載・翻訳は含みません。",
+    "categories": [
+      "LLM・チャットAI"
+    ],
+    "tags": [
+      "LLM"
+    ],
+    "lang": "ja"
   },
   {
     "id": "f2fa2f0eee8dc12f",
@@ -1100,7 +1100,7 @@
     "id": "16962332c3a7a302",
     "title": "AIコーディングの品質は「自分が知らないこと」で決まる — Claude Fable 5 フィールドガイド解説",
     "url": "https://zenn.dev/akimitu_666/articles/claude-fable-finding-unknowns",
-    "source": "Zenn (生成AI)",
+    "source": "Zenn (LLM)",
     "publishedAt": "2026-07-25T15:42:21.000Z",
     "summary": "この記事について Anthropic の Thariq Shihipar 氏が書いた A field guide to Claude Fable 5: Finding your unknowns（2026年7月6日）を読み解きながら、「AIエージェントに仕事を任せるときの品質は、モデルの性能ではなく自分の unknowns（わかっていないこと）の量で決まる」 という考え方と、その具体的な実践方法を…",
     "categories": [
@@ -1174,7 +1174,7 @@
     "id": "ecd8598c396f0a59",
     "title": "私のオープンソースプロジェクトは、なぜ思ったほど伸びなかったのか",
     "url": "https://zenn.dev/yohjisakamoto/articles/4067bada577bd8",
-    "source": "Zenn (生成AI)",
+    "source": "Zenn (LLM)",
     "publishedAt": "2026-07-25T14:38:22.000Z",
     "summary": "開示：私は Tura のメンテナーです。これは自分のプロジェクトを第三者として評価する投稿ではなく、オープンソースの伝え方と評価方法について率直な助言を求めるための投稿です。 2026年に入ってから、RTK、Caveman、Ponytail などのプロジェクトが「トークン使用量を80〜90%削減できる」と主張し、短期間で数万の GitHub Star を獲得したものもあります。 以前のスタートアッ…",
     "categories": [
@@ -1209,6 +1209,21 @@
       "IT一般"
     ],
     "tags": [],
+    "lang": "ja"
+  },
+  {
+    "id": "d9f50b65abe95470",
+    "title": "執筆AIと検収AIを分けたら、事故を配布前に止められるようになった話 — Claude Codeの多段レビュー体制の作り方",
+    "url": "https://zenn.dev/teku1000/articles/8fb7e4d315da93",
+    "source": "Zenn (LLM)",
+    "publishedAt": "2026-07-25T13:32:46.000Z",
+    "summary": "AIに文書やアプリを作らせると、それらしい成果物が一瞬で出てきます。問題は、間違いも同じくらい\"それらしい\"ことです。 数字の根拠が1世代前の計算結果のまま残っている 表の太字（＝最良のはずの値）が、本文の結論と真逆の対象に付いている 「修正しました」と宣言された追記が、置換ミスで実は入っていない これらは全部、私の環境で実際に起きたことです。そして厄介なのは、作った本人（AI）に見直させても通っ…",
+    "categories": [
+      "LLM・チャットAI"
+    ],
+    "tags": [
+      "LLM"
+    ],
     "lang": "ja"
   },
   {
@@ -2155,19 +2170,6 @@
     "lang": "en"
   },
   {
-    "id": "e76137d12e2b6468",
-    "title": "介護の業務システムをGitHubに公開するまでに、何を消して、何を残したか",
-    "url": "https://zenn.dev/ossudesu/articles/zenn-kaigo-public-article",
-    "source": "Zenn (生成AI)",
-    "publishedAt": "2026-07-24T16:06:34.000Z",
-    "summary": "この記事について 介護施設で14年働いた経験をもとに、ショートステイ（短期入所）向けの業務支援システムを個人開発しています。これをポートフォリオとしてGitHubに公開しました。 ただ、業務システムの公開は怖いです。コードや設定のどこかに、利用者や施設の情報が残っていないか。 一度公開すれば、あとで消してもフォークや検索エンジンのキャッシュに残ります。取り返しがつきません。 この記事は、公開までに…",
-    "categories": [
-      "IT一般"
-    ],
-    "tags": [],
-    "lang": "ja"
-  },
-  {
     "id": "04aa753d0df2117c",
     "title": "As US weighs response to Chinese AI, industry urges against broad open-weight restrictions",
     "url": "https://techcrunch.com/2026/07/24/as-us-weighs-response-to-chinese-ai-industry-urges-against-broad-open-weight-restrictions",
@@ -2180,19 +2182,6 @@
     "tags": [
       "OSS"
     ],
-    "lang": "en"
-  },
-  {
-    "id": "5e9345a197ed8eb2",
-    "title": "Prompt: The AI Threat Model Just Changed - AI Business",
-    "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1RcHVhQkJ1RndlaHhoSy0xU2JveDNVNUV2RGJ2cVRRbFZhYjEzdllmRTRFTjMwblFIcVlUMHppRGNmMmpoa1Y0SUZBdWNlNXNIcWxrWV9aZHJ2Vmk3T3hnbXF0UGdWcUE2V2IyVlV0OTRPTmNuc2ZnUEw2NzM?oc=5",
-    "source": "Google News (generative AI)",
-    "publishedAt": "2026-07-24T15:43:32.000Z",
-    "summary": "Prompt: The AI Threat Model Just Changed AI Business",
-    "categories": [
-      "IT一般"
-    ],
-    "tags": [],
     "lang": "en"
   },
   {
@@ -2411,19 +2400,6 @@
     "lang": "en"
   },
   {
-    "id": "1082d54345910371",
-    "title": "AbortControllerでタイムアウトさせたつもりが、reject後も裏の処理はそのまま完走していた",
-    "url": "https://zenn.dev/numarn/articles/abortcontroller-cancel-signal-handson",
-    "source": "Zenn (生成AI)",
-    "publishedAt": "2026-07-24T13:18:43.000Z",
-    "summary": "これまでこのシリーズでは、同時実行数を絞るp-limit、優先度付きキューのp-queue、リトライのp-retry、非同期の排他制御async-mutexなど、Node.js(サーバー側でJavaScriptを動かす仕組み)のハーネス系ライブラリをnpm installして試してきました。今回はライブラリではなく、Node.js自体に標準搭載されているAbortController(処理を途中で…",
-    "categories": [
-      "IT一般"
-    ],
-    "tags": [],
-    "lang": "ja"
-  },
-  {
     "id": "53fcd4bfca860a60",
     "title": "生成AIは「友人」日本で1割超 利用率は58.8％と大幅上昇 - TBS NEWS DIG",
     "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE1SRXUyQndRQnZNazFpeWJ3bXFCdXZ4NV9Ham14SHNGaGhuR0JldHZPdl9tME5pMXZjbG1QY2wxZndnM1QtVVZ6THBBajdNWVo4RGdqTW55RQ?oc=5",
@@ -2450,19 +2426,17 @@
     "lang": "en"
   },
   {
-    "id": "55b89bbaac0162b2",
-    "title": "さくらのAI Engineたちに「どう盛り上げるか」を議論させたら、結論は「どれをやるかは人間が決めてください」だった",
-    "url": "https://zenn.dev/thegatebreaker/articles/sakura_ai_engine_debate_tool",
-    "source": "Zenn (生成AI)",
-    "publishedAt": "2026-07-24T11:24:22.000Z",
-    "summary": "TL;DR 「人間の会議をAIが記録する」の逆——AI自身に会議をさせて議事録を作らせる自作ツール「超AI議事録」で、さくらのAI Engineキャンペーンの盛り上げ企画を3回討議させた。 さくら限定の2回は手堅い結論（既存ツールの再発明→5週間開発計画）に落ち着いたが、外部4ベンダー＋低reasoning_effortで意図的に発散させた3回目は、「AIの寿命としてのリクエスト」「逆ハルシネーシ…",
+    "id": "787c430dbb3c58f8",
+    "title": "Generative AI use in Japan exceeds 50% for first time | NHK WORLD-JAPAN News - nhk.or.jp",
+    "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE11Y2dteVNvX0FoRkdCT1JBWGRCT2tGbGp6cTV2eE83bDQxYXVJa1M5dkNLZ21JaUFDQWpQRlZKTk9xZktXYWZqMzdyeTFzLUItbVJWUlYtQkltLVhxOUxvZEJB?oc=5",
+    "source": "Google News (generative AI)",
+    "publishedAt": "2026-07-24T11:22:17.000Z",
+    "summary": "Generative AI use in Japan exceeds 50% for first time | NHK WORLD-JAPAN News nhk.or.jp",
     "categories": [
-      "プロダクト・ツール"
+      "IT一般"
     ],
-    "tags": [
-      "プロダクト"
-    ],
-    "lang": "ja"
+    "tags": [],
+    "lang": "en"
   },
   {
     "id": "4f3508b7b01592ba",
@@ -2579,38 +2553,6 @@
       "IT一般"
     ],
     "tags": [],
-    "lang": "ja"
-  },
-  {
-    "id": "c5c9335f68171a14",
-    "title": "「53.7%節約」と出ているのに、私のClaude Codeは1トークンも節約していなかった",
-    "url": "https://zenn.dev/ryok/articles/token-saver-denominator",
-    "source": "Zenn (生成AI)",
-    "publishedAt": "2026-07-24T10:00:05.000Z",
-    "summary": "結論 先日、私は「tokenmaxingはsuccessmaxingではない」という記事を書いた。自作のトークン節約プロキシ RTK（Rust Token Killer）で自分の開発を測ったら、成果を変えずに 54.7%のトークンが消えた——そう誇らしげに書いた。 その数日後、JetBrains がまさに RTK と同種のツールをエンドツーエンドで実測し、宣伝された「60〜90%節約」が現実には±…",
-    "categories": [
-      "LLM・チャットAI",
-      "プロダクト・ツール"
-    ],
-    "tags": [
-      "LLM",
-      "プロダクト"
-    ],
-    "lang": "ja"
-  },
-  {
-    "id": "e59efba86f62188b",
-    "title": "「敵対的検証して」を運用した実数――検出4件、見逃し3件",
-    "url": "https://zenn.dev/ryuka_lucas/articles/adversarial-verification-in-practice",
-    "source": "Zenn (生成AI)",
-    "publishedAt": "2026-07-24T09:37:36.000Z",
-    "summary": "「敵対的検証して」と指示すると何が起きるか 2026年7月17日、株式会社ログラスのlittle_hands氏が「AIに『レビューして』はもう古い？『敵対的検証』のすすめ」という記事を公開しました。記事の切り口案に対して「レビューして」ではなく「敵対的検証して」と指示した具体例が紹介されています。 Claude Codeが「読者視点」「主張の正しさ」「記事としての成立性」という3つの観点でスケプテ…",
-    "categories": [
-      "LLM・チャットAI"
-    ],
-    "tags": [
-      "LLM"
-    ],
     "lang": "ja"
   },
   {
@@ -3446,19 +3388,6 @@
     "lang": "en"
   },
   {
-    "id": "94bd37b20b909bc6",
-    "title": "次期行財政Ｐ案を了承 県、生成ＡＩの活用本格化 ワ事務所「重大な内部統制不備」 - 沖縄八重山日報",
-    "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1IakdvcVJhS0YxQUl0RnZlVUZGR2tkWEd1M091LWNWckRSaUdyemdDdzlNN1VJUHk3bW1BQmM4RzBTcXhYamRVV09qQ2hUUV9ldzh6aEtXcEw?oc=5",
-    "source": "Google News (生成AI)",
-    "publishedAt": "2026-07-23T20:00:19.000Z",
-    "summary": "次期行財政Ｐ案を了承 県、生成ＡＩの活用本格化 ワ事務所「重大な内部統制不備」 沖縄八重山日報",
-    "categories": [
-      "IT一般"
-    ],
-    "tags": [],
-    "lang": "ja"
-  },
-  {
     "id": "30503cc51f09223a",
     "title": "Fairfax County School Board approves restrictions on generative AI, digital devices - FFXnow",
     "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOY2dac2R3bGdHWE54d2U0RTlTN2NTdkU2QlZlOG4zNmxJdDNncjR0MDlyWWpmZ2Z4dHgwVHloaGpKS0lKN2pnS0V3ODJub0g1c3F2cHZJSXNoeG82RG0weE0ya3J0a1RYYmIxX0d2azdrdkl4UkE1OUlERVdEMFJ1azF6SWNLa2U0aDhGOUl3Yi0wRGRiYy1WVEJEdDM4WDlFUzFFYkdndHFCQlctSnY2R2ZEVUREY1B2?oc=5",
@@ -4117,6 +4046,75 @@
     "source": "Google News (生成AI)",
     "publishedAt": "2026-07-23T02:10:06.000Z",
     "summary": "米陸軍、生成AI“使い放題”を撤回──利用制限を再導入（ビジネス＋IT） Yahoo!ニュース",
+    "categories": [
+      "IT一般"
+    ],
+    "tags": [],
+    "lang": "ja"
+  },
+  {
+    "id": "2a630b07785185ee",
+    "title": "電子カルテ連動型「生成AIサービス」が契約300件を突破 | 株式会社ソフトウェア・サービスのプレスリリース - PR TIMES",
+    "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9HYVJFSnNiWWhtRWtKbWpXamR2YXotR3JMRThONFFqNHlMbl9BclJmVW1mRWpISWEya29Rdl9FSDZvd1ZuXzREd01XOEd2aWtONXRVUTBLLXlMYnF4NTctdDB4aE1yT29UblE?oc=5",
+    "source": "Google News (生成AI)",
+    "publishedAt": "2026-07-23T02:00:03.000Z",
+    "summary": "電子カルテ連動型「生成AIサービス」が契約300件を突破 | 株式会社ソフトウェア・サービスのプレスリリース PR TIMES",
+    "categories": [
+      "プロダクト・ツール"
+    ],
+    "tags": [
+      "プロダクト"
+    ],
+    "lang": "ja"
+  },
+  {
+    "id": "0fa1eb0d3af96faa",
+    "title": "「RICOH スクラムアセット 生成AIサポートモデル（品質管理部門編）」を提供開始 - PR TIMES",
+    "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5FdXlfb1NkZzVFT3dNT1VscXJLaENQbF9LYTJidGNORF9HcS03bnNJTjhFVUdrWVlCNGRkQjBubmd1bmFLVlE5RWRKaWRlT2JHLVJaZmk0TzJ0cUpTNnAtZi15R0VtOVF6NXc?oc=5",
+    "source": "Google News (生成AI)",
+    "publishedAt": "2026-07-23T02:00:03.000Z",
+    "summary": "「RICOH スクラムアセット 生成AIサポートモデル（品質管理部門編）」を提供開始 PR TIMES",
+    "categories": [
+      "IT一般"
+    ],
+    "tags": [],
+    "lang": "ja"
+  },
+  {
+    "id": "0293c3d4fceffbf8",
+    "title": "取材メモプラス 会津美里町が生成ＡＩ活用 行政サービス向上へ - 47NEWS",
+    "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE1RYXBGa0g0ekc0QXE0cmpLRDNmTnppOWVDWU5QcS1uaTVqVlNpRUZqdEtkRWRSZnY2Mmlnd0JqTGFBYTh0T0xZN0FzWQ?oc=5",
+    "source": "Google News (生成AI)",
+    "publishedAt": "2026-07-23T02:00:00.000Z",
+    "summary": "取材メモプラス 会津美里町が生成ＡＩ活用 行政サービス向上へ 47NEWS",
+    "categories": [
+      "IT一般"
+    ],
+    "tags": [],
+    "lang": "ja"
+  },
+  {
+    "id": "54deae92d2af89ff",
+    "title": "企業向けAIツールの成長率トップはAnthropic、アカウント数が最も多いのはMicrosoft 365　Okta調査",
+    "url": "https://www.itmedia.co.jp/news/articles/2607/23/news076.html",
+    "source": "ITmedia NEWS",
+    "publishedAt": "2026-07-23T01:19:00.000Z",
+    "summary": "アイデンティティ管理サービスを提供する米Oktaは、同社のサービスを用いている2万社以上の匿名化されたアクセスデータに基づく、企業でのAIツール利用実態について調査結果を発表しました。",
+    "categories": [
+      "プロダクト・ツール"
+    ],
+    "tags": [
+      "プロダクト"
+    ],
+    "lang": "ja"
+  },
+  {
+    "id": "a38c674e715e0dcd",
+    "title": "フェローテクがストップ高気配、生成ＡＩ需要拡大で業績予想増額(ウエルスアドバイザー) - Yahoo!ファイナンス",
+    "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxON1RFdHg5Q2VrVUh3NWx6SmgyUkZhTmNKZTZYaDJWay1vNUNVa1B2ZGpNcm1wcGhYMG1rMDZqX0Q1aWVhZkEyTmFuaTZERVdaQi1NZFdsNUFPVUEzUGZNWkk1QzRlMzlfN3BIUTJvbkFNTzdZTmtvbWN3WldzOWdmUWZqNHJwYUE?oc=5",
+    "source": "Google News (生成AI)",
+    "publishedAt": "2026-07-23T01:16:00.000Z",
+    "summary": "フェローテクがストップ高気配、生成ＡＩ需要拡大で業績予想増額(ウエルスアドバイザー) Yahoo!ファイナンス",
     "categories": [
       "IT一般"
     ],

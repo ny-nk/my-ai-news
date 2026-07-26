@@ -1,0 +1,48 @@
+name: Update news
+
+# 毎日ニュースを取得して news.json を更新（コミット）する。
+# Pages デプロイは含まない（private リポジトリのため）。
+# 公開したくなったら upload-pages-artifact + deploy-pages のジョブを足す。
+
+on:
+  schedule:
+    - cron: '0 22 * * *' # 毎日 22:00 UTC ≒ 翌 07:00 JST
+  workflow_dispatch:
+
+permissions:
+  contents: write # news.json のコミット用
+
+concurrency:
+  group: update-news
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Fetch news
+        run: npm run fetch
+
+      - name: Verify build still succeeds
+        run: npm run build
+
+      - name: Commit updated news.json
+        run: |
+          if ! git diff --quiet -- src/data/news.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add src/data/news.json
+            git commit -m "chore: update news.json"
+            git push
+          else
+            echo "news.json unchanged"
+          fi

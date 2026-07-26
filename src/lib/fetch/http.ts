@@ -1,5 +1,5 @@
 export const USER_AGENT =
-  'my-ai-news/1.0 (+https://github.com/; personal AI news aggregator)';
+  'my-ai-news/1.0 (+https://github.com/ny-nk/my-ai-news; personal AI news aggregator)';
 
 const ACCEPT_FEED =
   'application/rss+xml, application/atom+xml, application/xml, text/xml, */*';

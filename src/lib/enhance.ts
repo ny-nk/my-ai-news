@@ -6,6 +6,7 @@ import type { NewsItem, Prefs, Lang } from './types';
 
 interface CardRef {
   unit: HTMLElement; // 並び替え/非表示の単位（<li> か .news-card）
+  el: HTMLElement; // .news-card 本体（既読クラスの付け外し用）
   item: NewsItem;
 }
 
@@ -32,6 +33,7 @@ export function initEnhance(): void {
 
   const cards: CardRef[] = [...feed.querySelectorAll<HTMLElement>('.news-card')].map((el) => ({
     unit: (el.closest('li') as HTMLElement) ?? el,
+    el,
     item: parseCard(el),
   }));
 
@@ -52,8 +54,9 @@ export function initEnhance(): void {
     lang: 'ja' as 'all' | Lang, // 既定は日本語（ControlBar の selected と一致させる）
     query: '',
     sort: 'affinity' as 'affinity' | 'recent',
+    unreadOnly: false,
   };
-  const now = Date.now();
+  let seenSet = new Set(prefs.seen);
 
   // ステータス通知と 🙅 の取り消し用（クリックハンドラより前に用意する）
   const status = document.getElementById('backup-status');
@@ -65,17 +68,20 @@ export function initEnhance(): void {
 
   const visible = (c: CardRef): boolean => {
     if (prefs.hidden.includes(c.item.id)) return false;
+    if (state.unreadOnly && seenSet.has(c.item.id)) return false;
     if (state.cats.size && !c.item.categories.some((x) => state.cats.has(x))) return false;
     if (!c.item.pinned && state.lang !== 'all' && c.item.lang !== state.lang) return false;
     if (state.query) {
       const q = state.query.toLowerCase();
-      const hay = `${c.item.title} ${c.item.summary} ${c.item.tags.join(' ')}`.toLowerCase();
+      const hay = `${c.item.title} ${c.item.summary} ${c.item.source} ${c.item.tags.join(' ')}`.toLowerCase();
       if (!hay.includes(q)) return false;
     }
     return true;
   };
 
   const render = (): void => {
+    const now = Date.now(); // 都度取得（開きっぱなしのタブで順位が陳腐化しないように）
+    seenSet = new Set(prefs.seen);
     const shown = cards.filter(visible);
     const scored = shown.map((c) => ({
       c,
@@ -85,15 +91,35 @@ export function initEnhance(): void {
           : computeScore(c.item, prefs, SCORING, now),
     }));
     scored.sort((a, b) => b.key - a.key);
+
+    // 常設カード（プラグイン）は日付がなくスコア最下位に沈むため、
+    // 日替わりで2枚だけ上部に混ぜ込む。残りは末尾（カテゴリチップで全件見られる）。
+    const pinned = scored.filter((s) => s.c.item.pinned);
+    const rest = scored.filter((s) => !s.c.item.pinned);
+    let ordered = scored;
+    if (pinned.length && rest.length) {
+      const day = Math.floor(now / 86400000);
+      const rot = day % pinned.length;
+      const rotated = [...pinned.slice(rot), ...pinned.slice(0, rot)];
+      const picks = rotated.slice(0, 2);
+      const leftovers = rotated.slice(2);
+      ordered = [...rest];
+      [4, 12].forEach((pos, i) => {
+        if (picks[i]) ordered.splice(Math.min(pos, ordered.length), 0, picks[i]);
+      });
+      ordered.push(...leftovers);
+    }
+
     for (const c of cards) c.unit.hidden = true;
-    for (const { c } of scored) {
+    for (const { c } of ordered) {
       c.unit.hidden = false;
+      c.el.classList.toggle('seen', seenSet.has(c.item.id));
       feed.appendChild(c.unit);
     }
     const empty = document.getElementById('empty');
-    if (empty) empty.hidden = scored.length !== 0;
+    if (empty) empty.hidden = ordered.length !== 0;
     const count = document.getElementById('result-count');
-    if (count) count.textContent = `${scored.length}件表示中（全${cards.length}件）`;
+    if (count) count.textContent = `${ordered.length}件表示中（全${cards.length}件）`;
   };
 
   // 記事内アクション（イベント委譲）
@@ -120,6 +146,7 @@ export function initEnhance(): void {
     } else if (target.closest('.title')) {
       prefs = updatePrefs(prefs, ref.item, 'click', SCORING);
       savePrefs(prefs); // 遷移はそのまま許可（re-render しない）
+      ref.el.classList.add('seen'); // 既読の見た目だけ即時反映
     }
   });
 
@@ -139,6 +166,11 @@ export function initEnhance(): void {
   const search = document.getElementById('search') as HTMLInputElement | null;
   search?.addEventListener('input', () => {
     state.query = search.value;
+    render();
+  });
+  const unreadChk = document.getElementById('unread-only') as HTMLInputElement | null;
+  unreadChk?.addEventListener('change', () => {
+    state.unreadOnly = unreadChk.checked;
     render();
   });
   const sortSel = document.getElementById('sort') as HTMLSelectElement | null;

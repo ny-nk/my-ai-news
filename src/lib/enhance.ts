@@ -1,6 +1,7 @@
 import { loadPrefs, savePrefs, resetPrefs, serializePrefs, parsePrefsBackup } from './storage';
 import { computeScore, updatePrefs, emptyPrefs, unhideItem } from './affinity';
 import { SCORING } from '../../config/scoring';
+import { buildSyncUrl, readSyncedPrefs } from './sync';
 import type { NewsItem, Prefs, Lang } from './types';
 
 interface CardRef {
@@ -193,6 +194,68 @@ export function initEnhance(): void {
     reader.onerror = () => say('ファイルの読み取りに失敗しました。');
     reader.readAsText(file);
   });
+
+  // 端末間共有: リンク生成
+  const panel = document.getElementById('sync-panel');
+  const urlBox = document.getElementById('sync-url') as HTMLTextAreaElement | null;
+  document.getElementById('sync')?.addEventListener('click', async () => {
+    if (!panel || !urlBox) return;
+    const stripped = new URL(location.href);
+    stripped.hash = '';
+    urlBox.value = await buildSyncUrl(prefs, stripped.toString());
+    panel.hidden = false;
+    urlBox.select();
+    say('同期リンクを作成しました。別の端末で開いてください。');
+  });
+  document.getElementById('sync-copy')?.addEventListener('click', async () => {
+    if (!urlBox) return;
+    try {
+      await navigator.clipboard.writeText(urlBox.value);
+      say('リンクをコピーしました。');
+    } catch {
+      urlBox.select();
+      say('コピーできませんでした。選択された文字列を手動でコピーしてください。');
+    }
+  });
+  document.getElementById('sync-close')?.addEventListener('click', () => {
+    if (panel) panel.hidden = true;
+  });
+
+  // 端末間共有: URL ハッシュから取り込み（上書き。直前の状態には undo で戻せる）
+  const importFromHash = async (): Promise<void> => {
+    const incoming = await readSyncedPrefs(location.hash);
+    if (incoming === undefined) return; // 同期リンクではない
+    // ペイロードを URL から消す（履歴に残さない・再読み込みで再適用しない）
+    history.replaceState(null, '', location.pathname + location.search);
+    if (incoming === null) {
+      say('同期リンクを読み取れませんでした（リンクが壊れているようです）。');
+      return;
+    }
+    const previous = prefs;
+    prefs = { ...incoming, seen: prefs.seen }; // seen は同期対象外なので手元の値を残す
+    savePrefs(prefs);
+    render();
+    say('別の端末の好みを取り込みました。');
+    const undoSync = document.getElementById('undo-sync') as HTMLButtonElement | null;
+    if (undoSync) {
+      undoSync.hidden = false;
+      undoSync.addEventListener(
+        'click',
+        () => {
+          prefs = previous;
+          savePrefs(prefs);
+          undoSync.hidden = true;
+          say('取り込みを取り消しました。');
+          render();
+        },
+        { once: true },
+      );
+    }
+  };
+
+  // 初回読み込み時と、開いたままのページにリンクが貼られた場合（ハッシュ変化）の両方に対応
+  void importFromHash();
+  addEventListener('hashchange', () => void importFromHash());
 
   render();
 }

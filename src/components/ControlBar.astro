@@ -25,8 +25,21 @@ const { categories } = Astro.props;
   <button id="export" type="button" title="好みデータをファイルに保存（ブラウザのデータが消えても復元できます）">好みを書き出す</button>
   <button id="import" type="button" title="書き出したファイルから好みデータを復元">好みを読み込む</button>
   <input id="import-file" type="file" accept="application/json,.json" hidden aria-hidden="true" tabindex="-1" />
+  <button id="sync" type="button" title="別の端末へ好みを移すためのリンクを作る">端末間で共有</button>
   <button id="reset" type="button" title="学習した好み・非表示設定をすべて削除">学習をリセット</button>
   <p id="result-count" class="result-count" role="status" aria-live="polite"></p>
   <span id="backup-status" class="backup-status" role="status" aria-live="polite"></span>
   <button id="undo" type="button" hidden>非表示を元に戻す</button>
+  <button id="undo-sync" type="button" hidden>取り込みを取り消す</button>
+  <div id="sync-panel" class="sync-panel" hidden>
+    <p class="sync-help">
+      このリンクを別の端末で開くと、いまの好みが引き継がれます（リンクは外部に送信されません）。
+      開いた端末の好みは<strong>上書き</strong>されます。
+    </p>
+    <textarea id="sync-url" class="sync-url" rows="3" readonly aria-label="同期リンク"></textarea>
+    <div class="sync-actions">
+      <button id="sync-copy" type="button">リンクをコピー</button>
+      <button id="sync-close" type="button">閉じる</button>
+    </div>
+  </div>
 </div>

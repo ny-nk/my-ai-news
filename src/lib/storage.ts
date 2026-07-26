@@ -12,16 +12,20 @@ export function loadPrefs(store: StorageLike = globalThis.localStorage): Prefs {
   try {
     const raw = store.getItem(STORAGE_KEY);
     if (!raw) return emptyPrefs();
-    const parsed = JSON.parse(raw) as Partial<Prefs>;
-    if (parsed?.version !== PREFS_VERSION) return emptyPrefs();
-    return { ...emptyPrefs(), ...parsed } as Prefs;
+    // バックアップと同じ検証を通す（version だけでなく各フィールドの型も見る）。
+    // 壊れたデータを素通しすると affinity 側で実行時クラッシュするため。
+    return parsePrefsBackup(raw) ?? emptyPrefs();
   } catch {
     return emptyPrefs();
   }
 }
 
 export function savePrefs(prefs: Prefs, store: StorageLike = globalThis.localStorage): void {
-  store.setItem(STORAGE_KEY, JSON.stringify(prefs));
+  try {
+    store.setItem(STORAGE_KEY, JSON.stringify(prefs));
+  } catch {
+    // 保存不可（Safari プライベートモード・容量超過）でも操作自体は続行させる
+  }
 }
 
 export function resetPrefs(store: StorageLike = globalThis.localStorage): void {

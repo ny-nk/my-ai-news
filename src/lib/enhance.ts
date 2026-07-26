@@ -36,6 +36,17 @@ export function initEnhance(): void {
   }));
 
   let prefs: Prefs = loadPrefs();
+
+  // フィードから消えた記事の id を掃除（トリムで14日より古い記事は戻らないため）
+  {
+    const feedIds = new Set(cards.map((c) => c.item.id));
+    const hidden = prefs.hidden.filter((id) => feedIds.has(id));
+    const seen = prefs.seen.filter((id) => feedIds.has(id));
+    if (hidden.length !== prefs.hidden.length || seen.length !== prefs.seen.length) {
+      prefs = { ...prefs, hidden, seen };
+      savePrefs(prefs);
+    }
+  }
   const state = {
     cats: new Set<string>(),
     lang: 'ja' as 'all' | Lang, // 既定は日本語（ControlBar の selected と一致させる）

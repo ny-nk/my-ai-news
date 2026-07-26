@@ -34,6 +34,21 @@ describe('storage', () => {
     store.setItem(STORAGE_KEY, JSON.stringify({ ...emptyPrefs(), version: PREFS_VERSION + 1 }));
     expect(loadPrefs(store)).toEqual(emptyPrefs());
   });
+  it('returns emptyPrefs when a stored sub-field is malformed (no crash later)', () => {
+    const store = fakeStore();
+    store.setItem(STORAGE_KEY, JSON.stringify({ ...emptyPrefs(), tags: null }));
+    expect(loadPrefs(store)).toEqual(emptyPrefs());
+    store.setItem(STORAGE_KEY, JSON.stringify({ ...emptyPrefs(), hidden: 'oops' }));
+    expect(loadPrefs(store)).toEqual(emptyPrefs());
+  });
+  it('savePrefs swallows storage failures (Safari private mode etc.)', () => {
+    const throwing: StorageLike = {
+      getItem: () => null,
+      setItem: () => { throw new Error('QuotaExceededError'); },
+      removeItem: () => {},
+    };
+    expect(() => savePrefs(emptyPrefs(), throwing)).not.toThrow();
+  });
   it('reset clears prefs', () => {
     const store = fakeStore();
     savePrefs(emptyPrefs(), store);

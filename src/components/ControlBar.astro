@@ -16,9 +16,11 @@ const { categories } = Astro.props;
   </fieldset>
 
   {/* 固定領域: 高さ一定の1段だけを sticky にする */}
-  {/* 先頭へ戻る: 画面右下に浮かせる（固定バー内だと他のボタンに埋もれて気付かれない） */}
+  {/* 先頭へ戻る: 画面右下に浮かせる（固定バー内だと他のボタンに埋もれて気付かれない）。
+      見た目はニュースカードと同じ言語に揃えて、UI から浮かないようにする。 */}
   <button id="to-top" type="button" title="先頭へ戻る（絞り込みはページ上部）" aria-label="先頭へ戻る" hidden>
-    <span aria-hidden="true">↑</span>
+    <span class="to-top-arrow" aria-hidden="true">↑</span>
+    <span class="to-top-label">先頭</span>
   </button>
 
   <div class="controls-bar" id="controls-bar">

@@ -17,11 +17,21 @@ header h1 { font-size: 1.4rem; margin: 0.2rem 0; }
 }
 /* 「上部に固定」オフ */
 .controls-unpinned { position: static !important; }
-/* 先頭へ戻る（固定バー内に置くのでフィードのどこからでも押せる） */
-#to-top { border: 1px solid var(--border); background: var(--bg); color: var(--fg); border-radius: 8px; padding: 0.35rem 0.6rem; font-size: 0.85rem; white-space: nowrap; }
-#to-top:hover { border-color: var(--accent); color: var(--accent); }
-/* 最上部にいる間は不要なので隠す（幅だけ確保して高さは変えない） */
+/* 先頭へ戻る: 画面右下のフローティングボタン（どこにいても目に入る） */
+#to-top {
+  position: fixed; right: 1rem; bottom: 1rem; z-index: 40;
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 1px solid var(--accent); background: var(--accent); color: var(--bg);
+  font-size: 1.3rem; line-height: 1; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 12px rgb(0 0 0 / 0.3);
+}
+#to-top:hover { filter: brightness(1.1); }
+#to-top:focus-visible { outline: 3px solid var(--fg); outline-offset: 2px; }
 #to-top[hidden] { display: none; }
+/* 端末の安全領域（iPhone のホームバー等）を避ける */
+@supports (padding: env(safe-area-inset-bottom)) {
+  #to-top { bottom: calc(1rem + env(safe-area-inset-bottom)); }
+}
 /* 固定バーぶんの余白（アンカー移動やフォーカス時に隠れないように） */
 html { scroll-padding-top: 4rem; }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }

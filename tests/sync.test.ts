@@ -18,6 +18,11 @@ describe('syncablePrefs', () => {
   it('drops seen (unused by scoring, keeps the URL short)', () => {
     expect(syncablePrefs(samplePrefs()).seen).toEqual([]);
   });
+  it('端末ごとの閲覧履歴（viewed）は同期しない', () => {
+    const p = samplePrefs();
+    p.viewed.push('should-not-travel');
+    expect(syncablePrefs(p).viewed).toEqual([]);
+  });
 });
 
 describe('sync url round-trip', () => {

@@ -2,7 +2,7 @@ import type { NewsItem, Prefs, ScoringConfig } from './types';
 import { PREFS_VERSION } from '../../config/scoring';
 
 export function emptyPrefs(): Prefs {
-  return { version: PREFS_VERSION, tags: {}, sources: {}, categories: {}, hidden: [], seen: [] };
+  return { version: PREFS_VERSION, tags: {}, sources: {}, categories: {}, hidden: [], seen: [], viewed: [] };
 }
 
 function ageDays(iso: string, now: number): number {

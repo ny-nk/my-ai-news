@@ -5,7 +5,7 @@ import { parsePrefsBackup } from './storage';
  * 端末間で好みを移す URL の組み立て/読み取り。
  * ペイロードは URL のハッシュに置くので、サーバへは送信されない。
  *
- * `seen` は同期しない（スコア計算に使っておらず、URL を無駄に長くするだけ）。
+ * `seen` と `viewed` は同期しない（端末ごとの閲覧履歴であり、URL を無駄に長くするだけ）。
  */
 export const SYNC_PARAM = 'p';
 
@@ -27,9 +27,9 @@ async function inflateFromBase64Url(payload: string): Promise<string> {
   return new Response(stream).text();
 }
 
-/** 同期用に持ち出す分だけ抜き出す（seen は落とす）。 */
+/** 同期用に持ち出す分だけ抜き出す（seen / viewed は落とす）。 */
 export function syncablePrefs(prefs: Prefs): Prefs {
-  return { ...prefs, seen: [] };
+  return { ...prefs, seen: [], viewed: [] };
 }
 
 /** 現在の好みを埋め込んだ同期用 URL を作る。 */

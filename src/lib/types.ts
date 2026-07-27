@@ -48,6 +48,8 @@ export interface Prefs {
   categories: Record<string, number>;
   hidden: string[];
   seen: string[];
+  /** 画面に一定時間表示された記事（クリックしていなくても「見た」扱い） */
+  viewed: string[];
 }
 
 export interface ScoringConfig {

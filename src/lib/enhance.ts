@@ -44,8 +44,13 @@ export function initEnhance(): void {
     const feedIds = new Set(cards.map((c) => c.item.id));
     const hidden = prefs.hidden.filter((id) => feedIds.has(id));
     const seen = prefs.seen.filter((id) => feedIds.has(id));
-    if (hidden.length !== prefs.hidden.length || seen.length !== prefs.seen.length) {
-      prefs = { ...prefs, hidden, seen };
+    const viewed = prefs.viewed.filter((id) => feedIds.has(id));
+    if (
+      hidden.length !== prefs.hidden.length ||
+      seen.length !== prefs.seen.length ||
+      viewed.length !== prefs.viewed.length
+    ) {
+      prefs = { ...prefs, hidden, seen, viewed };
       savePrefs(prefs);
     }
   }
@@ -82,6 +87,7 @@ export function initEnhance(): void {
   const render = (): void => {
     const now = Date.now(); // 都度取得（開きっぱなしのタブで順位が陳腐化しないように）
     seenSet = new Set(prefs.seen);
+    const viewedSet = new Set(prefs.viewed);
     const shown = cards.filter(visible);
     const scored = shown.map((c) => ({
       c,
@@ -114,6 +120,7 @@ export function initEnhance(): void {
     for (const { c } of ordered) {
       c.unit.hidden = false;
       c.el.classList.toggle('seen', seenSet.has(c.item.id));
+      c.el.classList.toggle('viewed', viewedSet.has(c.item.id));
       feed.appendChild(c.unit);
     }
     const empty = document.getElementById('empty');
@@ -297,7 +304,8 @@ export function initEnhance(): void {
       return;
     }
     const previous = prefs;
-    prefs = { ...incoming, seen: prefs.seen }; // seen は同期対象外なので手元の値を残す
+    // seen / viewed は同期対象外なので手元の値を残す
+    prefs = { ...incoming, seen: prefs.seen, viewed: prefs.viewed };
     savePrefs(prefs);
     render();
     say('別の端末の好みを取り込みました。');
@@ -325,7 +333,91 @@ export function initEnhance(): void {
   setupControlsScroll();
   setupBackToTop(); // 固定バーの設定とは独立させる（片方が失敗しても他方は動く）
   setupThumbFallback();
+  setupViewTracking(cards, () => prefs, (next) => {
+    prefs = next;
+    savePrefs(prefs);
+  });
   render();
+}
+
+/** 画面に留まったとみなす時間（一瞬かすめただけでは「見た」にしない） */
+const VIEW_DWELL_MS = 1500;
+
+/** 閲覧済み ID をまとめて取り込む（重複は無視。変化が無ければ null を返す）。 */
+export function mergeViewed(prefs: Prefs, ids: string[]): Prefs | null {
+  const viewed = new Set(prefs.viewed);
+  let added = false;
+  for (const id of ids) {
+    if (!id || viewed.has(id)) continue;
+    viewed.add(id);
+    added = true;
+  }
+  return added ? { ...prefs, viewed: [...viewed] } : null;
+}
+
+/**
+ * 画面に一定時間表示された記事を「閲覧済み」として記録する。
+ * ニュースは1日1回しか更新されないので、前回どこまで目を通したかが分かると
+ * 同じ記事を何度も読み直さずに済む。
+ */
+function setupViewTracking(
+  cards: CardRef[],
+  getPrefs: () => Prefs,
+  setPrefs: (next: Prefs) => void,
+): void {
+  if (typeof IntersectionObserver === 'undefined') return;
+
+  const byElement = new Map<Element, CardRef>();
+  for (const c of cards) byElement.set(c.el, c);
+
+  const timers = new Map<Element, ReturnType<typeof setTimeout>>();
+  let pending: string[] = [];
+  let flushTimer: ReturnType<typeof setTimeout> | undefined;
+
+  // まとめて保存する（記事ごとに localStorage を書くと重い）
+  const flush = (): void => {
+    flushTimer = undefined;
+    if (pending.length === 0) return;
+    const next = mergeViewed(getPrefs(), pending);
+    pending = [];
+    if (next) setPrefs(next);
+  };
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        const ref = byElement.get(entry.target);
+        if (!ref) continue;
+        if (entry.isIntersecting) {
+          if (timers.has(entry.target)) continue;
+          timers.set(
+            entry.target,
+            setTimeout(() => {
+              timers.delete(entry.target);
+              entry.target.classList.add('viewed');
+              pending.push(ref.item.id);
+              if (!flushTimer) flushTimer = setTimeout(flush, 1000);
+            }, VIEW_DWELL_MS),
+          );
+        } else {
+          // 通り過ぎただけなら記録しない
+          const t = timers.get(entry.target);
+          if (t) {
+            clearTimeout(t);
+            timers.delete(entry.target);
+          }
+        }
+      }
+    },
+    { threshold: 0.5 }, // カードの半分以上が見えている状態を「表示中」とする
+  );
+
+  for (const c of cards) io.observe(c.el);
+  // 離脱時に取りこぼしを保存
+  addEventListener('pagehide', flush);
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') flush();
+  });
 }
 
 /**

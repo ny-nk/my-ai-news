@@ -67,6 +67,10 @@ button { cursor: pointer; }
   .news-card .thumb { width: 64px; height: 64px; }
 }
 .news-card.seen .title { color: var(--muted); font-weight: 500; }
+/* 画面に表示された（＝目を通した）記事は控えめに沈める。未読が自然に目立つ */
+.news-card.viewed { opacity: 0.62; }
+.news-card.viewed:hover, .news-card.viewed:focus-within { opacity: 1; }
+@media (prefers-reduced-motion: no-preference) { .news-card { transition: opacity 0.2s ease; } }
 .news-card .title { font-weight: 600; color: var(--fg); text-decoration: none; font-size: 1.05rem; }
 .news-card .title:hover { color: var(--accent); text-decoration: underline; }
 .news-card .meta { color: var(--muted); font-size: 0.8rem; display: flex; gap: 0.6rem; margin: 0.3rem 0; }

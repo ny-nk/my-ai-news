@@ -66,6 +66,25 @@ describe('storage', () => {
     store.setItem(STORAGE_KEY, JSON.stringify(newP));
     expect(loadPrefs(store).tags['NEW']).toBe(2);
   });
+  it('viewed の無い古いデータも読める（後方互換）', () => {
+    const store = fakeStore();
+    const old = { ...emptyPrefs() } as unknown as Record<string, unknown>;
+    delete old.viewed; // viewed 導入前に保存されたデータ
+    store.setItem(STORAGE_KEY, JSON.stringify(old));
+    expect(loadPrefs(store).viewed).toEqual([]);
+  });
+  it('viewed が壊れていれば初期化する', () => {
+    const store = fakeStore();
+    store.setItem(STORAGE_KEY, JSON.stringify({ ...emptyPrefs(), viewed: 'oops' }));
+    expect(loadPrefs(store)).toEqual(emptyPrefs());
+  });
+  it('viewed を保存して読み戻せる', () => {
+    const store = fakeStore();
+    const p = emptyPrefs();
+    p.viewed.push('abc123');
+    savePrefs(p, store);
+    expect(loadPrefs(store).viewed).toEqual(['abc123']);
+  });
   it('reset clears prefs', () => {
     const store = fakeStore();
     savePrefs(emptyPrefs(), store);

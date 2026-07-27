@@ -72,6 +72,8 @@ export function parsePrefsBackup(raw: string): Prefs | null {
   if (p.version !== PREFS_VERSION) return null;
   if (!isWeightMap(p.tags) || !isWeightMap(p.sources) || !isWeightMap(p.categories)) return null;
   if (!isIdList(p.hidden) || !isIdList(p.seen)) return null;
+  // viewed は後から追加した項目なので、無い古いデータも受け入れる
+  if (p.viewed !== undefined && !isIdList(p.viewed)) return null;
   return {
     version: PREFS_VERSION,
     tags: p.tags,
@@ -79,5 +81,6 @@ export function parsePrefsBackup(raw: string): Prefs | null {
     categories: p.categories,
     hidden: p.hidden,
     seen: p.seen,
+    viewed: p.viewed ?? [],
   };
 }

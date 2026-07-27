@@ -14,25 +14,32 @@ const date = !item.pinned && item.publishedAt ? new Date(item.publishedAt).toLoc
   data-published={item.publishedAt}
   data-pinned={item.pinned ? 'true' : undefined}
 >
-  <a
-    class="title"
-    href={item.url}
-    target="_blank"
-    rel="noopener noreferrer"
-    lang={item.lang}
-    aria-label={`${item.title}（新しいタブで開きます）`}
-  >{item.title}</a>
-  <div class="meta">
-    <span class="source">{item.source}</span>
-    {date && <time datetime={item.publishedAt}>{date}</time>}
-  </div>
-  {item.summary && <p class="summary" lang={item.lang}>{item.summary}</p>}
-  <div class="taglist">
-    {item.categories.map((c) => <span class="chip">{c}</span>)}
-    {item.tags.map((t) => <span class="tag">#{t}</span>)}
-  </div>
-  <div class="actions">
-    <button class="like" type="button" aria-label="興味あり" aria-pressed="false">👍</button>
-    <button class="hide" type="button" aria-label="非表示にする">🙅</button>
+  {item.image && (
+    <a class="thumb" href={item.url} target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
+      <img src={item.image} alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+    </a>
+  )}
+  <div class="body">
+    <a
+      class="title"
+      href={item.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      lang={item.lang}
+      aria-label={`${item.title}（新しいタブで開きます）`}
+    >{item.title}</a>
+    <div class="meta">
+      <span class="source">{item.source}</span>
+      {date && <time datetime={item.publishedAt}>{date}</time>}
+    </div>
+    {item.summary && <p class="summary" lang={item.lang}>{item.summary}</p>}
+    <div class="taglist">
+      {item.categories.map((c) => <span class="chip">{c}</span>)}
+      {item.tags.map((t) => <span class="tag">#{t}</span>)}
+    </div>
+    <div class="actions">
+      <button class="like" type="button" aria-label="興味あり" aria-pressed="false">👍</button>
+      <button class="hide" type="button" aria-label="非表示にする">🙅</button>
+    </div>
   </div>
 </article>

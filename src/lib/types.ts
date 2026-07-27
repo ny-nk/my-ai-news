@@ -23,6 +23,8 @@ export interface NewsItem {
   lang: Lang;
   /** 常設カード（プラグイン等）: トリム除外・日付非表示・言語フィルタ免除 */
   pinned?: boolean;
+  /** サムネイル（記事ページの og:image。取得できた記事だけ持つ） */
+  image?: string;
 }
 
 export interface Source {

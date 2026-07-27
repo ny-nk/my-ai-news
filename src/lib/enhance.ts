@@ -324,7 +324,22 @@ export function initEnhance(): void {
 
   setupControlsScroll();
   setupBackToTop(); // 固定バーの設定とは独立させる（片方が失敗しても他方は動く）
+  setupThumbFallback();
   render();
+}
+
+/**
+ * サムネは外部サイトの画像を直接参照しているので、消えたり弾かれたりする。
+ * 壊れた画像アイコンや空枠が残らないよう、読み込み失敗したら枠ごと取り除く。
+ */
+function setupThumbFallback(): void {
+  const drop = (e: Event): void => {
+    const img = e.target as HTMLElement | null;
+    if (img?.tagName !== 'IMG') return;
+    img.closest('.thumb')?.remove();
+  };
+  // error はバブリングしないので capture で拾う
+  document.addEventListener('error', drop, true);
 }
 
 const PIN_KEY = 'my-tech-news:pin-controls';

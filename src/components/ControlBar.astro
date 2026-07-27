@@ -42,6 +42,7 @@ const { categories } = Astro.props;
         <button id="import" type="button" title="書き出したファイルから好みデータを復元">好みを読み込む</button>
         <input id="import-file" type="file" accept="application/json,.json" hidden aria-hidden="true" tabindex="-1" />
         <button id="sync" type="button" title="別の端末へ好みを移すためのリンクを作る">端末間で共有</button>
+        <button id="clear-viewed" type="button" title="薄く表示されている「閲覧済み」の印だけを消す（好みの学習は残る）">閲覧の印を消す</button>
         <button id="reset" type="button" title="学習した好み・非表示設定をすべて削除">学習をリセット</button>
         <label class="pin-toggle" title="スクロールしても操作バーを画面上部に固定する">
           <input type="checkbox" id="pin-controls" checked />スクロール中も上部に固定

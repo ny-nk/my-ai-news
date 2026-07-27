@@ -220,6 +220,21 @@ export function initEnhance(): void {
     render();
   });
 
+  // 閲覧の印（薄く表示）だけを消す。好みの学習・非表示設定はそのまま。
+  document.getElementById('clear-viewed')?.addEventListener('click', () => {
+    if (prefs.viewed.length === 0 && prefs.seen.length === 0) {
+      say('消す閲覧の印はありません。');
+      return;
+    }
+    prefs = { ...prefs, viewed: [], seen: [] };
+    savePrefs(prefs);
+    for (const el of document.querySelectorAll('.news-card.viewed, .news-card.seen')) {
+      el.classList.remove('viewed', 'seen');
+    }
+    say('閲覧の印を消しました。');
+    render();
+  });
+
   // 🙅 の取り消し（直前の1件）
   undoBtn?.addEventListener('click', () => {
     if (!lastHidden) return;

@@ -9,12 +9,26 @@ function ageDays(iso: string, now: number): number {
   return Math.max(0, (now - new Date(iso).getTime()) / 86400000);
 }
 
+/**
+ * 記事 ID から 0〜1 の安定した値を作る。
+ * 探索枠に乱数をそのまま使うとページを開き直すたびに順位が入れ替わるため、
+ * 「記事ごとに決まっているが偏りのない値」を使う。
+ */
+export function stableJitter(id: string): number {
+  let h = 2166136261; // FNV-1a
+  for (let i = 0; i < id.length; i++) {
+    h ^= id.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return ((h >>> 0) % 100000) / 100000;
+}
+
 export function computeScore(
   item: NewsItem,
   prefs: Prefs,
   cfg: ScoringConfig,
   now: number,
-  rand: () => number = Math.random,
+  rand: (id: string) => number = stableJitter,
 ): number {
   const recency = item.publishedAt ? Math.pow(0.5, ageDays(item.publishedAt, now) / cfg.halfLifeDays) : 0;
   let raw = 0;
@@ -24,7 +38,8 @@ export function computeScore(
   // (-1,1) に飽和させる（spec §7.2 の「正規化して合算」）。
   // 重みが育っても recency と explore の影響力が残り、フィードが硬直しない。
   const aff = raw / (1 + Math.abs(raw));
-  const explore = rand() * cfg.explore;
+  // 記事 ID 由来なので、同じ記事なら毎回同じ値＝リロードで順位が動かない
+  const explore = rand(item.id) * cfg.explore;
   return cfg.wRecency * recency + cfg.wAffinity * aff + explore;
 }
 

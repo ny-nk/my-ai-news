@@ -77,6 +77,33 @@ describe('updatePrefs', () => {
   });
 });
 
+describe('並び順の安定性', () => {
+  it('同じ記事のスコアは何度計算しても同じ（リロードで順位が動かない）', () => {
+    const p = emptyPrefs();
+    const it = item();
+    const a = computeScore(it, p, SCORING, NOW);
+    const b = computeScore(it, p, SCORING, NOW);
+    const c = computeScore(it, p, SCORING, NOW);
+    expect(a).toBe(b);
+    expect(b).toBe(c);
+  });
+  it('記事が違えば探索値も違う（多様性は維持される）', () => {
+    const p = emptyPrefs();
+    const values = ['a1', 'b2', 'c3', 'd4', 'e5'].map((id) =>
+      computeScore(item({ id, publishedAt: '' }), p, SCORING, NOW),
+    );
+    expect(new Set(values).size).toBeGreaterThan(1);
+  });
+  it('探索値は 0〜explore の範囲に収まる', () => {
+    const p = emptyPrefs();
+    for (const id of ['x', 'yy', 'zzz', 'article-12345', '']) {
+      const s = computeScore(item({ id, publishedAt: '' }), p, SCORING, NOW);
+      expect(s).toBeGreaterThanOrEqual(0);
+      expect(s).toBeLessThanOrEqual(SCORING.explore);
+    }
+  });
+});
+
 describe('unhideItem', () => {
   it('undoes a down signal: unhides and restores weights', () => {
     const start = emptyPrefs();

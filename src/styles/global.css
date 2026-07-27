@@ -5,21 +5,21 @@ body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", "Hiragino K
 .wrap { max-width: 860px; margin: 0 auto; padding: 1rem; }
 header h1 { font-size: 1.4rem; margin: 0.2rem 0; }
 .sub { color: var(--muted); font-size: 0.85rem; }
-.controls { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 1rem 0; position: sticky; top: 0; z-index: 10; background: var(--bg); padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+/* 絞り込みチップ（流れる。高さが変わっても固定バーに影響しない） */
+.chips-block { margin: 1rem 0 0.5rem; }
 
-/* 下方向スクロール中は1段に畳んで記事領域を広げる（.controls-condensed）。
-   上スクロール・最上部・フォーカス中・メニュー展開中は自動で戻す。 */
-.controls-condensed fieldset,
-.controls-condensed .spacer,
-.controls-condensed .status-row { display: none; }
-.controls-condensed { padding: 0.35rem 0; }
-.controls-condensed #search { max-width: 220px; }
-/* 上部固定をやめる設定のとき */
-.controls-unpinned { position: static; }
-@media (prefers-reduced-motion: no-preference) {
-  .controls { transition: padding 0.15s ease; }
+/* 固定するのは高さ一定の1段だけ。スクロール中に高さが変化しないのでガタつかない。 */
+.controls-bar {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
+  background: var(--bg); padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
 }
-.pin-toggle { font-size: 0.75rem; color: var(--muted); display: inline-flex; align-items: center; gap: 0.25rem; cursor: pointer; user-select: none; }
+/* 「上部に固定」オフ */
+.controls-unpinned { position: static !important; }
+/* 固定バーぶんの余白（アンカー移動やフォーカス時に隠れないように） */
+html { scroll-padding-top: 4rem; }
+.pin-toggle { font-size: 0.8rem; color: var(--muted); display: inline-flex; align-items: center; gap: 0.35rem; cursor: pointer; user-select: none; }
 .controls fieldset { border: 0; margin: 0; padding: 0; }
 .controls legend { font-size: 0.75rem; color: var(--muted); padding: 0 0 0.2rem; }
 .controls .spacer { flex-basis: 100%; height: 0; }
@@ -53,7 +53,7 @@ button { cursor: pointer; }
 .data-menu-body button { border: 1px solid var(--border); background: var(--bg); border-radius: 8px; padding: 0.45rem 0.6rem; text-align: left; }
 
 /* ステータス行（高さを予約して文言の出入りでレイアウトが動かないように） */
-.status-row { flex-basis: 100%; margin: 0; min-height: 1.5em; display: flex; flex-wrap: wrap; gap: 0.35rem 0.75rem; align-items: center; font-size: 0.8rem; color: var(--muted); }
+.status-row { margin: 0.5rem 0 0; min-height: 1.5em; display: flex; flex-wrap: wrap; gap: 0.35rem 0.75rem; align-items: center; font-size: 0.8rem; color: var(--muted); }
 
 .sync-panel { width: 100%; border-top: 1px solid var(--border); padding-top: 0.5rem; }
 .sync-help { margin: 0 0 0.5rem; font-size: 0.8rem; color: var(--muted); }
@@ -65,7 +65,6 @@ button { cursor: pointer; }
 @media (max-width: 480px) {
   .cat-chip { padding: 0.45rem 0.8rem; }
   .actions button { padding: 0.45rem 0.9rem; }
-  .controls { position: static; }
   /* 初期画面を記事に割く: 説明は2行まで・チップは横スクロール1行 */
   .sub { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .chips-row { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 0.2rem; }

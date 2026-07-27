@@ -2,8 +2,11 @@
 interface Props { categories: readonly string[] }
 const { categories } = Astro.props;
 ---
-<div class="controls">
-  <fieldset>
+{/* sticky を効かせるため、この3ブロックは .wrap 直下の兄弟として置く
+    （sticky 要素は親の高さの範囲でしか固定されないので、ラッパーで囲まない） */}
+<Fragment>
+  {/* 流れる領域: 絞り込みチップ（sticky に載せないので高さが変わっても跳ねない） */}
+  <fieldset class="chips-block">
     <legend>カテゴリで絞り込み（複数選択可）</legend>
     <div class="chips-row">
       {categories.map((c) => (
@@ -11,46 +14,50 @@ const { categories } = Astro.props;
       ))}
     </div>
   </fieldset>
-  <span class="spacer"></span>
-  <select id="lang" aria-label="言語">
-    <option value="ja" selected>日本語</option>
-    <option value="en">英語</option>
-    <option value="all">言語: すべて</option>
-  </select>
-  <select id="sort" aria-label="並び替え">
-    <option value="affinity">好み順</option>
-    <option value="recent">新着順</option>
-  </select>
-  <label class="cat-chip"><input type="checkbox" id="unread-only" />未読のみ</label>
-  <input id="search" type="search" placeholder="キーワード検索" aria-label="検索" />
-  <details class="data-menu">
-    <summary>データ管理</summary>
-    <div class="data-menu-body">
-      <button id="export" type="button" title="好みデータをファイルに保存（ブラウザのデータが消えても復元できます）">好みを書き出す</button>
-      <button id="import" type="button" title="書き出したファイルから好みデータを復元">好みを読み込む</button>
-      <input id="import-file" type="file" accept="application/json,.json" hidden aria-hidden="true" tabindex="-1" />
-      <button id="sync" type="button" title="別の端末へ好みを移すためのリンクを作る">端末間で共有</button>
-      <button id="reset" type="button" title="学習した好み・非表示設定をすべて削除">学習をリセット</button>
-      <div id="sync-panel" class="sync-panel" hidden>
-        <p class="sync-help">
-          このリンクを別の端末で開くと、いまの好みが引き継がれます（リンクは外部に送信されません）。
-          開いた端末の好みは<strong>上書き</strong>されます。
-        </p>
-        <textarea id="sync-url" class="sync-url" rows="3" readonly aria-label="同期リンク"></textarea>
-        <div class="sync-actions">
-          <button id="sync-copy" type="button">リンクをコピー</button>
-          <button id="sync-close" type="button">閉じる</button>
+
+  {/* 固定領域: 高さ一定の1段だけを sticky にする */}
+  <div class="controls-bar" id="controls-bar">
+    <select id="lang" aria-label="言語">
+      <option value="ja" selected>日本語</option>
+      <option value="en">英語</option>
+      <option value="all">言語: すべて</option>
+    </select>
+    <select id="sort" aria-label="並び替え">
+      <option value="affinity">好み順</option>
+      <option value="recent">新着順</option>
+    </select>
+    <label class="cat-chip"><input type="checkbox" id="unread-only" />未読のみ</label>
+    <input id="search" type="search" placeholder="キーワード検索" aria-label="検索" />
+    <details class="data-menu">
+      <summary>データ管理</summary>
+      <div class="data-menu-body">
+        <button id="export" type="button" title="好みデータをファイルに保存（ブラウザのデータが消えても復元できます）">好みを書き出す</button>
+        <button id="import" type="button" title="書き出したファイルから好みデータを復元">好みを読み込む</button>
+        <input id="import-file" type="file" accept="application/json,.json" hidden aria-hidden="true" tabindex="-1" />
+        <button id="sync" type="button" title="別の端末へ好みを移すためのリンクを作る">端末間で共有</button>
+        <button id="reset" type="button" title="学習した好み・非表示設定をすべて削除">学習をリセット</button>
+        <label class="pin-toggle" title="スクロールしても操作バーを画面上部に固定する">
+          <input type="checkbox" id="pin-controls" checked />スクロール中も上部に固定
+        </label>
+        <div id="sync-panel" class="sync-panel" hidden>
+          <p class="sync-help">
+            このリンクを別の端末で開くと、いまの好みが引き継がれます（リンクは外部に送信されません）。
+            開いた端末の好みは<strong>上書き</strong>されます。
+          </p>
+          <textarea id="sync-url" class="sync-url" rows="3" readonly aria-label="同期リンク"></textarea>
+          <div class="sync-actions">
+            <button id="sync-copy" type="button">リンクをコピー</button>
+            <button id="sync-close" type="button">閉じる</button>
+          </div>
         </div>
       </div>
-    </div>
-  </details>
+    </details>
+  </div>
+
   <p class="status-row">
-    <label class="pin-toggle" title="スクロールしても操作バーを画面上部に固定する">
-      <input type="checkbox" id="pin-controls" checked />上部に固定
-    </label>
     <span id="result-count" role="status" aria-live="polite"></span>
     <span id="backup-status" role="status" aria-live="polite"></span>
     <button id="undo" type="button" hidden>非表示を元に戻す</button>
     <button id="undo-sync" type="button" hidden>取り込みを取り消す</button>
   </p>
-</div>
+</Fragment>

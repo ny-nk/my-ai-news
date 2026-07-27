@@ -306,30 +306,15 @@ export function initEnhance(): void {
 
 const PIN_KEY = 'my-tech-news:pin-controls';
 
-/** 操作バーを畳むべきか。純粋関数（スクロール制御の判定ロジック）。 */
-export function shouldCondense(opts: {
-  y: number;
-  lastY: number;
-  busy: boolean; // 入力フォーカス中・メニュー展開中
-  topThreshold?: number;
-}): boolean {
-  const { y, lastY, busy, topThreshold = 160 } = opts;
-  if (busy) return false; // 操作中は畳まない
-  if (y < topThreshold) return false; // 最上部付近は常に全表示
-  return y > lastY; // 下方向のときだけ畳む
-}
-
 /**
- * 操作バーのスクロール挙動。
- * - 下方向スクロール中は1段に畳む（記事の可視領域を広げる）
- * - 上スクロール・最上部・操作中（フォーカス/メニュー展開）は展開したまま
- * - 「上部に固定」オフなら sticky 自体をやめる
+ * 操作バーの固定切り替え。
+ * 固定そのものは CSS の position:sticky に任せる（スクロール中に高さを変えないので
+ * ガタつきや点滅が起きない）。ここは設定の読み書きだけを担う。
  */
 function setupControlsScroll(): void {
-  const controls = document.querySelector<HTMLElement>('.controls');
+  const controls = document.getElementById('controls-bar');
   if (!controls) return;
   const pin = document.getElementById('pin-controls') as HTMLInputElement | null;
-  const menu = controls.querySelector<HTMLDetailsElement>('.data-menu');
 
   let pinned = true;
   try {
@@ -339,7 +324,6 @@ function setupControlsScroll(): void {
   }
   const applyPinned = (): void => {
     controls.classList.toggle('controls-unpinned', !pinned);
-    if (!pinned) controls.classList.remove('controls-condensed');
   };
   if (pin) pin.checked = pinned;
   applyPinned();
@@ -353,26 +337,4 @@ function setupControlsScroll(): void {
     }
     applyPinned();
   });
-
-  let lastY = scrollY;
-  let ticking = false;
-  const update = (): void => {
-    ticking = false;
-    if (!pinned) return;
-    const y = scrollY;
-    const busy = Boolean(menu?.open) || controls.contains(document.activeElement);
-    const condense = shouldCondense({ y, lastY, busy });
-    lastY = y;
-    controls.classList.toggle('controls-condensed', condense);
-  };
-  addEventListener(
-    'scroll',
-    () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(update);
-    },
-    { passive: true },
-  );
-  controls.addEventListener('focusin', () => controls.classList.remove('controls-condensed'));
 }

@@ -150,18 +150,38 @@ export function initEnhance(): void {
     }
   });
 
+  // 絞り込みを変えたら結果の先頭が見えるように戻す（下の方で操作したときの迷子防止）
+  const scrollToFeedTop = (): void => {
+    const before = scrollY;
+    if (before <= 0) return;
+    const top = (document.querySelector('.chips-block') as HTMLElement | null)?.offsetTop ?? 0;
+    scrollTo({ top, behavior: 'smooth' });
+    // smooth が途中で止まる/効かない環境でも目的地に着地させる
+    const settle = (delay: number): void => {
+      setTimeout(() => {
+        // behavior は必ず instant を明示する（CSS の scroll-behavior:smooth を
+        // 継承すると、フォールバックのはずが再び滑らかスクロールになり着地しない）
+        if (Math.abs(scrollY - top) > 8) scrollTo({ top, behavior: 'instant' });
+      }, delay);
+    };
+    settle(400);
+    settle(1200);
+  };
+
   // コントロールバー
   document.querySelectorAll<HTMLInputElement>('.cat-chip-input').forEach((chip) => {
     chip.addEventListener('change', () => {
       if (chip.checked) state.cats.add(chip.value);
       else state.cats.delete(chip.value);
       render();
+      scrollToFeedTop();
     });
   });
   const langSel = document.getElementById('lang') as HTMLSelectElement | null;
   langSel?.addEventListener('change', () => {
     state.lang = langSel.value as 'all' | Lang;
     render();
+    scrollToFeedTop();
   });
   const search = document.getElementById('search') as HTMLInputElement | null;
   search?.addEventListener('input', () => {
@@ -172,11 +192,13 @@ export function initEnhance(): void {
   unreadChk?.addEventListener('change', () => {
     state.unreadOnly = unreadChk.checked;
     render();
+    scrollToFeedTop();
   });
   const sortSel = document.getElementById('sort') as HTMLSelectElement | null;
   sortSel?.addEventListener('change', () => {
     state.sort = sortSel.value as 'affinity' | 'recent';
     render();
+    scrollToFeedTop();
   });
   document.getElementById('reset')?.addEventListener('click', () => {
     if (!confirm('学習した好み・非表示設定をすべて削除します。よろしいですか？')) return;
@@ -337,4 +359,44 @@ function setupControlsScroll(): void {
     }
     applyPinned();
   });
+
+  setupBackToTop();
+}
+
+/**
+ * 「先頭へ戻る」。固定バー内に置いてあるので、4万px 下からでも1タップで
+ * 絞り込みチップのある先頭まで戻れる。
+ * 表示制御は IntersectionObserver（スクロールイベントを使わないので軽い）。
+ */
+function setupBackToTop(): void {
+  const btn = document.getElementById('to-top') as HTMLButtonElement | null;
+  if (!btn) return;
+
+  btn.addEventListener('click', () => {
+    const before = scrollY;
+    scrollTo({ top: 0, behavior: 'smooth' });
+    // smooth が途中で止まる/効かない環境でも必ず先頭に着地させる
+    const settle = (delay: number): void => {
+      setTimeout(() => {
+        // behavior は必ず instant を明示する（CSS の scroll-behavior:smooth を
+        // 継承すると、フォールバックのはずが再び滑らかスクロールになり着地しない）
+        if (scrollY > 0 && scrollY >= before - 1) scrollTo({ top: 0, behavior: 'instant' });
+      }, delay);
+    };
+    settle(400);
+    settle(1200);
+    // キーボード利用者が絞り込みチップへ直接進めるようにフォーカスも移す
+    document.querySelector<HTMLInputElement>('.cat-chip-input')?.focus({ preventScroll: true });
+  });
+
+  // 先頭付近では不要なので隠す。スクロール量で判定（IntersectionObserver より
+  // 「どれだけ下にいるか」を直接扱えて、しきい値の意味が明確）。
+  const sync = (): void => {
+    const shouldShow = scrollY >= 600;
+    if (btn.hidden === shouldShow) btn.hidden = !shouldShow; // 変化時だけ触る
+  };
+  sync();
+  // 真偽値ひとつの更新なので rAF を挟まず直接同期する
+  // （rAF は描画停止中に回らないため、ここで待つと反映が漏れる）
+  addEventListener('scroll', sync, { passive: true });
 }

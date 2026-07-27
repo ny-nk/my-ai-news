@@ -17,8 +17,14 @@ header h1 { font-size: 1.4rem; margin: 0.2rem 0; }
 }
 /* 「上部に固定」オフ */
 .controls-unpinned { position: static !important; }
+/* 先頭へ戻る（固定バー内に置くのでフィードのどこからでも押せる） */
+#to-top { border: 1px solid var(--border); background: var(--bg); color: var(--fg); border-radius: 8px; padding: 0.35rem 0.6rem; font-size: 0.85rem; white-space: nowrap; }
+#to-top:hover { border-color: var(--accent); color: var(--accent); }
+/* 最上部にいる間は不要なので隠す（幅だけ確保して高さは変えない） */
+#to-top[hidden] { display: none; }
 /* 固定バーぶんの余白（アンカー移動やフォーカス時に隠れないように） */
 html { scroll-padding-top: 4rem; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 .pin-toggle { font-size: 0.8rem; color: var(--muted); display: inline-flex; align-items: center; gap: 0.35rem; cursor: pointer; user-select: none; }
 .controls fieldset { border: 0; margin: 0; padding: 0; }
 .controls legend { font-size: 0.75rem; color: var(--muted); padding: 0 0 0.2rem; }

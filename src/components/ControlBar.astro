@@ -17,6 +17,7 @@ const { categories } = Astro.props;
 
   {/* 固定領域: 高さ一定の1段だけを sticky にする */}
   <div class="controls-bar" id="controls-bar">
+    <button id="to-top" type="button" title="先頭へ戻る（絞り込みチップもここにあります）" aria-label="先頭へ戻る">↑ 先頭</button>
     <select id="lang" aria-label="言語">
       <option value="ja" selected>日本語</option>
       <option value="en">英語</option>

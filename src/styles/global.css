@@ -6,6 +6,20 @@ body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", "Hiragino K
 header h1 { font-size: 1.4rem; margin: 0.2rem 0; }
 .sub { color: var(--muted); font-size: 0.85rem; }
 .controls { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 1rem 0; position: sticky; top: 0; z-index: 10; background: var(--bg); padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+
+/* 下方向スクロール中は1段に畳んで記事領域を広げる（.controls-condensed）。
+   上スクロール・最上部・フォーカス中・メニュー展開中は自動で戻す。 */
+.controls-condensed fieldset,
+.controls-condensed .spacer,
+.controls-condensed .status-row { display: none; }
+.controls-condensed { padding: 0.35rem 0; }
+.controls-condensed #search { max-width: 220px; }
+/* 上部固定をやめる設定のとき */
+.controls-unpinned { position: static; }
+@media (prefers-reduced-motion: no-preference) {
+  .controls { transition: padding 0.15s ease; }
+}
+.pin-toggle { font-size: 0.75rem; color: var(--muted); display: inline-flex; align-items: center; gap: 0.25rem; cursor: pointer; user-select: none; }
 .controls fieldset { border: 0; margin: 0; padding: 0; }
 .controls legend { font-size: 0.75rem; color: var(--muted); padding: 0 0 0.2rem; }
 .controls .spacer { flex-basis: 100%; height: 0; }

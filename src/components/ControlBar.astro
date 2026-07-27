@@ -45,6 +45,9 @@ const { categories } = Astro.props;
     </div>
   </details>
   <p class="status-row">
+    <label class="pin-toggle" title="スクロールしても操作バーを画面上部に固定する">
+      <input type="checkbox" id="pin-controls" checked />上部に固定
+    </label>
     <span id="result-count" role="status" aria-live="polite"></span>
     <span id="backup-status" role="status" aria-live="polite"></span>
     <button id="undo" type="button" hidden>非表示を元に戻す</button>

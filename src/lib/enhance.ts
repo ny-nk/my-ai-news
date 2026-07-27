@@ -323,6 +323,7 @@ export function initEnhance(): void {
   addEventListener('hashchange', () => void importFromHash());
 
   setupControlsScroll();
+  setupBackToTop(); // 固定バーの設定とは独立させる（片方が失敗しても他方は動く）
   render();
 }
 
@@ -359,8 +360,6 @@ function setupControlsScroll(): void {
     }
     applyPinned();
   });
-
-  setupBackToTop();
 }
 
 /**
@@ -372,15 +371,27 @@ function setupBackToTop(): void {
   const btn = document.getElementById('to-top') as HTMLButtonElement | null;
   if (!btn) return;
 
+  // スクロール量は環境で取得元が違う（iOS Safari 等で window.scrollY が 0 のまま
+  // documentElement/body 側だけ動くことがある）ので、取れる値の最大を使う。
+  const currentY = (): number =>
+    Math.max(
+      window.scrollY || 0,
+      document.documentElement.scrollTop || 0,
+      document.body.scrollTop || 0,
+    );
+
   btn.addEventListener('click', () => {
-    const before = scrollY;
+    const before = currentY();
     scrollTo({ top: 0, behavior: 'smooth' });
     // smooth が途中で止まる/効かない環境でも必ず先頭に着地させる
     const settle = (delay: number): void => {
       setTimeout(() => {
+        if (currentY() <= 0 || currentY() < before - 1) return; // 進んでいるなら任せる
         // behavior は必ず instant を明示する（CSS の scroll-behavior:smooth を
         // 継承すると、フォールバックのはずが再び滑らかスクロールになり着地しない）
-        if (scrollY > 0 && scrollY >= before - 1) scrollTo({ top: 0, behavior: 'instant' });
+        scrollTo({ top: 0, behavior: 'instant' });
+        document.documentElement.scrollTop = 0; // scrollTo が無効な環境向け
+        document.body.scrollTop = 0;
       }, delay);
     };
     settle(400);
@@ -392,11 +403,14 @@ function setupBackToTop(): void {
   // 先頭付近では不要なので隠す。スクロール量で判定（IntersectionObserver より
   // 「どれだけ下にいるか」を直接扱えて、しきい値の意味が明確）。
   const sync = (): void => {
-    const shouldShow = scrollY >= 600;
+    const shouldShow = currentY() >= 400;
     if (btn.hidden === shouldShow) btn.hidden = !shouldShow; // 変化時だけ触る
   };
   sync();
   // 真偽値ひとつの更新なので rAF を挟まず直接同期する
   // （rAF は描画停止中に回らないため、ここで待つと反映が漏れる）
   addEventListener('scroll', sync, { passive: true });
+  // スクロールを取りこぼす環境（慣性中にイベントが来ない等）への保険
+  addEventListener('touchmove', sync, { passive: true });
+  addEventListener('resize', sync, { passive: true });
 }

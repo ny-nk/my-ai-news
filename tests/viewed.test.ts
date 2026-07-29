@@ -1,6 +1,26 @@
 import { describe, it, expect } from 'vitest';
-import { mergeViewed } from '../src/lib/enhance';
+import { mergeViewed, shouldTrackView } from '../src/lib/enhance';
 import { emptyPrefs } from '../src/lib/affinity';
+
+describe('shouldTrackView（既読として記録するかの判定）', () => {
+  const base = { scrolled: true, intersecting: true, hiddenByFilter: false };
+
+  it('スクロール後に画面内にあれば記録する', () => {
+    expect(shouldTrackView(base)).toBe(true);
+  });
+
+  it('開いただけ（スクロールしていない）なら記録しない', () => {
+    expect(shouldTrackView({ ...base, scrolled: false })).toBe(false);
+  });
+
+  it('画面内に入っていなければ記録しない', () => {
+    expect(shouldTrackView({ ...base, intersecting: false })).toBe(false);
+  });
+
+  it('絞り込みで隠れているカードは記録しない', () => {
+    expect(shouldTrackView({ ...base, hiddenByFilter: true })).toBe(false);
+  });
+});
 
 describe('mergeViewed（閲覧済みの取り込み）', () => {
   it('新しい ID を追加する', () => {

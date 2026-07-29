@@ -356,7 +356,21 @@ export function initEnhance(): void {
 }
 
 /** 画面に留まったとみなす時間（一瞬かすめただけでは「見た」にしない） */
-const VIEW_DWELL_MS = 1500;
+const VIEW_DWELL_MS = 2500;
+/** これだけスクロールするまでは既読を記録しない（開いただけで既読にしないため） */
+const VIEW_START_SCROLL = 200;
+
+/**
+ * 記事を「見た」として記録し始めてよいかの判定。
+ * 開いた直後の画面内カードを既読にしないため、実際にスクロールされたことを条件にする。
+ */
+export function shouldTrackView(opts: {
+  scrolled: boolean; // 記録開始のスクロールに達したか
+  intersecting: boolean; // 画面内にほぼ全体が入っているか
+  hiddenByFilter: boolean; // 絞り込みで非表示か
+}): boolean {
+  return opts.scrolled && opts.intersecting && !opts.hiddenByFilter;
+}
 
 /** 閲覧済み ID をまとめて取り込む（重複は無視。変化が無ければ null を返す）。 */
 export function mergeViewed(prefs: Prefs, ids: string[]): Prefs | null {
@@ -398,17 +412,36 @@ function setupViewTracking(
     if (next) setPrefs(next);
   };
 
+  // ページを開いた直後の画面内カードを既読にしないため、
+  // 実際にスクロールされるまで記録を始めない。
+  let started = false;
+  const maybeStart = (): void => {
+    if (started) return;
+    const y = Math.max(window.scrollY || 0, document.documentElement.scrollTop || 0);
+    if (y >= VIEW_START_SCROLL) started = true;
+  };
+  addEventListener('scroll', maybeStart, { passive: true });
+  addEventListener('touchmove', maybeStart, { passive: true });
+
   const io = new IntersectionObserver(
     (entries) => {
       for (const entry of entries) {
         const ref = byElement.get(entry.target);
         if (!ref) continue;
-        if (entry.isIntersecting) {
+        // フィルタで隠れているカードは対象外（並び替え中の一瞬の交差も拾わない）
+        const ok = shouldTrackView({
+          scrolled: started,
+          intersecting: entry.isIntersecting,
+          hiddenByFilter: ref.unit.hidden,
+        });
+        if (ok) {
           if (timers.has(entry.target)) continue;
           timers.set(
             entry.target,
             setTimeout(() => {
               timers.delete(entry.target);
+              // 発火時点でも条件を満たしているか再確認（スクロールで外れた場合を除く）
+              if (ref.unit.hidden) return;
               entry.target.classList.add('viewed');
               pending.push(ref.item.id);
               if (!flushTimer) flushTimer = setTimeout(flush, 1000);
@@ -424,7 +457,7 @@ function setupViewTracking(
         }
       }
     },
-    { threshold: 0.5 }, // カードの半分以上が見えている状態を「表示中」とする
+    { threshold: 0.9 }, // カードのほぼ全体が見えている状態を「表示中」とする
   );
 
   for (const c of cards) io.observe(c.el);
